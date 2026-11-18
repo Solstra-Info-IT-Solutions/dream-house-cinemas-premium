@@ -109,3 +109,89 @@
 .dhc-home-motto{text-align:center;padding:22px 0;letter-spacing:.25em;font-size:9px;color:#8f8981}
 @media(max-width:900px){.dhc-home-service-strip{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.dhc-home-service-strip{grid-template-columns:repeat(2,1fr)}.dhc-home-service-strip>div{padding:19px 8px;font-size:8px}}
+
+/* FINAL BRAND SYSTEM — warm cinema black, clean white and DHC gold */
+:root{--black:#080808;--panel:#111;--paper:#fff;--muted:#c8c8c8;--gold:#f5b72f;--line:rgba(255,255,255,.16)}
+.dhc-site{--gold:#f5b72f;--paper:#fff;--muted:#c4c4c4;background:#080808;color:#fff;font-family:var(--font-playfair),Georgia,serif}
+.dhc-site *{font-family:var(--font-playfair),Georgia,serif}
+.dhc-site button,.dhc-site input,.dhc-site textarea{font-family:var(--font-playfair),Georgia,serif}
+.dhc-site .eyebrow,.dhc-site .source-visual-caption,.dhc-site .nav-links,.dhc-site .brand-name small,.dhc-site .footer-note,.dhc-site .source-service-grid article>span,.dhc-site .source-work-overlay small{letter-spacing:.13em}
+.dhc-site .eyebrow{color:#f5b72f}
+.dhc-site .brand-mark{width:46px;height:46px;border:1px solid #f5b72f;color:#f5b72f;background:linear-gradient(145deg,rgba(245,183,47,.16),rgba(245,183,47,.02));display:grid;place-items:center}
+.dhc-site .dhc-monogram svg{width:34px;height:34px}
+.dhc-site .brand-name{font-size:12px;letter-spacing:.11em;color:#fff}
+.dhc-site .brand-name small{color:#fff;font-size:8px;opacity:.72}
+.dhc-site .nav{position:sticky;top:0;background:rgba(5,5,5,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(245,183,47,.24)}
+.dhc-site .nav-links{gap:clamp(12px,1.55vw,25px);font-size:10px}
+.dhc-site .nav-links a:hover,.dhc-site .footer-contact:hover{color:#f5b72f}
+.dhc-site .nav-cta,.dhc-site .button-gold{background:#f5b72f;color:#090909;border:1px solid #f5b72f}
+.dhc-site .button-gold:hover{background:#fff;border-color:#fff;color:#090909}
+.dhc-site .button-line{color:#fff}
+.dhc-site .button-line:hover{color:#f5b72f}
+.dhc-site .dhc-hero-shade{background:linear-gradient(90deg,rgba(0,0,0,.91),rgba(0,0,0,.64) 42%,rgba(0,0,0,.1)),linear-gradient(0deg,#080808,transparent 24%,rgba(0,0,0,.25))}
+.dhc-site .dhc-hero-content h1{color:#fff}
+.dhc-site .dhc-hero-content h1 em,.dhc-site h1 em,.dhc-site h2 em,.dhc-site h3 em{color:#f5b72f}
+.dhc-site .dhc-home-service-strip{background:#111;border-color:rgba(245,183,47,.28)}
+.dhc-site .dhc-home-service-strip>div{color:#fff;border-color:rgba(255,255,255,.13)}
+.dhc-site .dhc-home-service-strip span{filter:grayscale(1);color:#f5b72f}
+.dhc-site .dhc-home-motto{color:#f5b72f}
+.dhc-site .dhc-service-grid,.dhc-site .source-service-grid{border-color:rgba(255,255,255,.22)}
+.dhc-site .dhc-service,.dhc-site .source-service-grid article{border-color:rgba(255,255,255,.17)}
+.dhc-site .dhc-service>span,.dhc-site .source-service-grid article>span{color:#f5b72f}
+.dhc-site .dhc-equipment-card,.dhc-site .source-rental-grid a{background:#111;border-color:rgba(255,255,255,.17)}
+.dhc-site .dhc-equipment-card:hover,.dhc-site .source-rental-grid a:hover{border-color:#f5b72f}
+.dhc-site .dhc-equipment-info svg,.dhc-site .dhc-equipment-info a,.dhc-site .source-rental-grid svg{color:#f5b72f}
+.dhc-site .source-page-hero{padding-top:90px;position:relative;z-index:1}
+.dhc-site .source-page-hero h1{color:#fff}
+.dhc-site .source-page-hero h1 em{color:#f5b72f}
+.dhc-site .source-page-hero p{color:#e0e0e0}
+.dhc-site .source-page-visual{position:relative;aspect-ratio:16/11;overflow:hidden;border:1px solid rgba(245,183,47,.35);background:#111}
+.dhc-site .source-page-visual video,.dhc-site .source-page-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dhc-site .source-page-visual video{z-index:0;opacity:.8;filter:saturate(.7)}
+.dhc-site .source-page-visual img{z-index:1;mix-blend-mode:screen;opacity:.12}
+.dhc-site .source-visual-caption{position:absolute;z-index:2;left:18px;bottom:18px;color:#fff;font-size:9px;text-shadow:0 2px 12px #000}
+.dhc-site .source-hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:28px}
+.dhc-site .source-page-hero{grid-template-columns:1fr 1.1fr}
+.dhc-site .source-works{padding-top:125px}
+.dhc-site .source-works-intro{max-width:780px}
+.dhc-site .source-works-intro p{color:#c8c8c8;max-width:600px;line-height:1.8;font-size:14px;margin-top:18px}
+.dhc-site .source-filter button{color:#fff;border-color:rgba(255,255,255,.28)}
+.dhc-site .source-filter button.active{background:#f5b72f;color:#080808;border-color:#f5b72f}
+.dhc-site .source-work-grid article{border:1px solid rgba(255,255,255,.14)}
+.dhc-site .source-work-grid article img{transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s;filter:grayscale(.12) saturate(.75)}
+.dhc-site .source-work-grid article:hover img{transform:scale(1.07);filter:grayscale(0) saturate(1)}
+.dhc-site .source-work-overlay{position:absolute;z-index:2;left:20px;right:20px;bottom:18px;display:flex;flex-direction:column;gap:7px}
+.dhc-site .source-work-overlay small{font-size:9px;color:#f5b72f}
+.dhc-site .source-work-overlay span{font-size:20px;color:#fff}
+.dhc-site .source-work-grid article i{position:absolute;z-index:2;right:18px;bottom:18px;width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.55);border-radius:50%;color:#f5b72f}
+.dhc-site .source-work-grid article:after{background:linear-gradient(0deg,rgba(0,0,0,.9),transparent 72%)}
+.dhc-site .source-form-wrap{position:relative;isolation:isolate}
+.dhc-site .source-form-backdrop{position:absolute;inset:0 0 auto;height:440px;z-index:-1;overflow:hidden;opacity:.3}
+.dhc-site .source-form-backdrop video,.dhc-site .source-contact-visual video{width:100%;height:100%;object-fit:cover}
+.dhc-site .source-form-backdrop span,.dhc-site .source-contact-visual span{position:absolute;inset:0;background:linear-gradient(0deg,#080808,rgba(0,0,0,.45))}
+.dhc-site .source-tabs button{color:#fff;border-color:rgba(255,255,255,.28)}
+.dhc-site .source-tabs button.active{background:#f5b72f;color:#080808;border-color:#f5b72f}
+.dhc-site .source-form{background:rgba(12,12,12,.92);border-color:rgba(245,183,47,.28);backdrop-filter:blur(14px)}
+.dhc-site .source-form input,.dhc-site .source-form textarea{background:#080808;color:#fff;border-color:rgba(255,255,255,.22)}
+.dhc-site .source-form input:focus,.dhc-site .source-form textarea:focus{border-color:#f5b72f;outline:1px solid #f5b72f}
+.dhc-site .source-form button{background:#f5b72f;color:#080808}
+.dhc-site .source-contact{position:relative;isolation:isolate}
+.dhc-site .source-contact-visual{position:absolute;z-index:-1;top:0;left:0;right:0;height:400px;overflow:hidden;opacity:.28}
+.dhc-site .source-contact-grid .source-form{background:rgba(12,12,12,.94)}
+.dhc-site .source-contact-info b{color:#f5b72f}
+.dhc-site .source-contact-info p{color:#fff}
+.dhc-site .source-bottom-cta{border-color:rgba(245,183,47,.25)}
+.dhc-site .source-bottom-cta em{color:#f5b72f}
+.dhc-site .source-trust-strip{border-color:rgba(245,183,47,.25);color:#fff}
+.dhc-site .source-about-stats b{color:#f5b72f}
+.dhc-site .footer{background:#050505;border-color:rgba(245,183,47,.24)}
+.dhc-site .footer-contact{color:#f5b72f}
+.dhc-site .dhc-about-hero h1 em,.dhc-site .dhc-about-story h2 em,.dhc-site .dhc-about-image em,.dhc-site .dhc-about-cta h2 em{color:#f5b72f}
+.dhc-site .dhc-about-hero{min-height:80vh}
+.dhc-site .dhc-about-hero p{color:#fff}
+.dhc-site .source-contact h1 em{color:#f5b72f}
+.dhc-site .source-service-grid p,.dhc-site .source-disclaimer{color:#c6c6c6}
+.dhc-site .source-rental-title{color:#fff}
+.dhc-site .source-trust{color:#c6c6c6}
+@media(max-width:900px){.dhc-site .source-page-hero{grid-template-columns:1fr}.dhc-site .nav-links{display:none}.dhc-site .mobile-menu{display:inline-flex}.dhc-site .mobile-panel{display:flex;position:absolute;top:100%;left:0;right:0;width:100%;padding:18px 24px 24px;background:rgba(5,5,5,.98);border-bottom:1px solid #f5b72f;flex-direction:column;gap:0;box-shadow:0 18px 30px rgba(0,0,0,.4)}.dhc-site .mobile-panel a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.dhc-site .mobile-panel a:hover{color:#f5b72f}}
+@media(max-width:560px){.dhc-site .source-page-hero{padding-top:110px;padding-bottom:55px}.dhc-site .source-page-visual{aspect-ratio:4/3}.dhc-site .source-hero-actions{align-items:flex-start;flex-direction:column}.dhc-site .source-form-wrap{padding-inline:18px}.dhc-site .source-contact{padding-inline:18px}.dhc-site .source-work-overlay span{font-size:18px}.dhc-site .dhc-hero-content{padding-top:125px}.dhc-site .dhc-hero-foot{font-size:7px;letter-spacing:.1em}.dhc-site .brand-name{font-size:10px}}
