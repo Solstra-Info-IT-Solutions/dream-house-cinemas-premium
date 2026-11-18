@@ -15,7 +15,8 @@ body { margin: 0; background: var(--black); color: var(--paper); font-family: 'D
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; }
 ::selection { background: var(--gold); color: #080808; }
-.site-shell { overflow: hidden; position: relative; }\n.site-shell:before { content: ''; position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .025; background-image: repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,255,255,.8) 2px 3px),repeating-linear-gradient(90deg,transparent 0 3px,rgba(255,255,255,.6) 3px 4px); }
+.site-shell { overflow: hidden; position: relative; }
+.site-shell:before { content: ''; position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .025; background-image: repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,255,255,.8) 2px 3px),repeating-linear-gradient(90deg,transparent 0 3px,rgba(255,255,255,.6) 3px 4px); }
 .wrap { width: min(1320px, calc(100% - 64px)); margin-inline: auto; }
 .eyebrow { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 .serif { font-family: 'Playfair Display', serif; font-weight: 400; }
@@ -114,7 +115,10 @@ button { font: inherit; cursor: pointer; }
 .value-card + .value-card { padding-left: 28px; border-left: 1px solid var(--line); }
 .value-card h3 { font-family: 'Playfair Display',serif; font-size: 27px; font-weight: 400; margin: 25px 0 14px; }
 .value-card p { color: #9f9991; line-height: 1.8; font-size: 12px; max-width: 270px; }
-@keyframes hero-drift { from { transform: scale(1.025) translate3d(0,0,0); } to { transform: scale(1.11) translate3d(-1.2%,.5%,0); } }\n@keyframes ticker { to { transform: translateX(-35%); } }\n@media(prefers-reduced-motion:reduce) { *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }\n@media(max-width:900px) {
+@keyframes hero-drift { from { transform: scale(1.025) translate3d(0,0,0); } to { transform: scale(1.11) translate3d(-1.2%,.5%,0); } }
+@keyframes ticker { to { transform: translateX(-35%); } }
+@media(prefers-reduced-motion:reduce) { *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+@media(max-width:900px) {
   .nav { height: 75px; padding: 0 24px; }
   .nav-links { gap: 18px; }
   .nav-links a:not(.nav-cta) { display: none; }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const fade = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0 } };
-const reveal = { initial: "hidden", whileInView: "visible", viewport: { once: true, amount: .18 }, variants: fade, transition: { duration: .8, ease: [0.22, 1, 0.36, 1] } };
+const reveal = { initial: "hidden", whileInView: "visible", viewport: { once: true, amount: .18 }, variants: fade, transition: { duration: .8, ease: [0.22, 1, 0.36, 1] as const } };
 
 function Header() {
   const [open, setOpen] = useState(false);
