@@ -102,3 +102,10 @@
 .source-about-stats b{font-size:clamp(17px,2.2vw,26px);color:var(--gold);letter-spacing:.02em}
 .source-about-stats span{font-size:10px;color:#aaa;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:650px){.source-about-stats{grid-template-columns:repeat(2,1fr);gap:26px}.dhc-about-hero{min-height:590px}}
+
+.dhc-home-service-strip{display:grid;grid-template-columns:repeat(6,1fr);background:#0d1013;border-block:1px solid var(--line)}
+.dhc-home-service-strip>div{padding:25px 10px;text-align:center;border-right:1px solid var(--line);font-size:9px;font-weight:700;letter-spacing:.08em;color:#e6e0d8}
+.dhc-home-service-strip span{display:block;font-size:23px;margin-bottom:9px}
+.dhc-home-motto{text-align:center;padding:22px 0;letter-spacing:.25em;font-size:9px;color:#8f8981}
+@media(max-width:900px){.dhc-home-service-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.dhc-home-service-strip{grid-template-columns:repeat(2,1fr)}.dhc-home-service-strip>div{padding:19px 8px;font-size:8px}}

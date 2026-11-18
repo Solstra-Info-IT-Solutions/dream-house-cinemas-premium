@@ -26,10 +26,13 @@ const categories = [
   {n:"06",title:"Production accessories",detail:"Power, mounting, cables and the practical kit around a camera build.",icon:Radio,image:P.camera},
 ];
 const services = [
-  ["01","Film & video production","Concept development, production planning, on-set execution and post-production."],
-  ["02","Cinematography & camera crew","Visual storytelling supported by experienced camera and lighting workflows."],
-  ["03","Commercial & branded films","Purpose-built films for brands, campaigns, products and digital platforms."],
-  ["04","Equipment rental","Camera, lens, lighting, grip and monitoring equipment for your next production."],
+  ["01","Ad film production","Creative commercial films built around your brand and audience."],
+  ["02","Documentary production","Documentary storytelling from research and planning to final delivery."],
+  ["03","Corporate films","Professional films for businesses, teams and organisations."],
+  ["04","Brand films","Distinctive visual stories that communicate brand identity."],
+  ["05","Promotional videos","Promotional content for launches, campaigns and marketing."],
+  ["06","Digital & social media","Video content designed for digital and social platforms."],
+  ["07","Production support","Production assistance and support for shoots of every scale."],
 ];
 function FilmVideo({src,className="",poster}:{src:string;className?:string;poster?:string}) {
   return <video className={className} autoPlay muted loop playsInline preload="metadata" poster={poster} aria-hidden="true"><source src={src} type="video/mp4"/></video>;
@@ -61,6 +64,7 @@ export function HomePage(){
    <div className="dhc-hero-foot"><span>CAMERA / LIGHT / GRIP / MOTION</span><a href="#production">SCROLL TO EXPLORE <ArrowDown size={13}/></a><span>DHC — PRODUCTION DIVISION</span></div>
   </section>
   <section className="dhc-intro wrap" id="production"><div className="dhc-intro-head"><span className="eyebrow">One creative partner. Two production essentials.</span><h2 className="serif">We shape the story.<br/><em>We equip the set.</em></h2></div><div className="dhc-intro-copy"><p className="large">Dream House Cinemas is a Kerala based film production and equipment rental company dedicated to turning ideas into powerful visual stories.</p><p>With a passion for storytelling and a commitment to excellence, we create content that connects, inspires and leaves a lasting impact. From concept development to final delivery, we handle every aspect of production with creativity, precision and professionalism.</p><Link href="/about" className="button-line">Inside Dream House <ArrowUpRight size={15}/></Link></div></section>
+  <section className="dhc-home-service-strip"><div><span>🎥</span>FILM PRODUCTION</div><div><span>📷</span>CAMERA RENTAL</div><div><span>💡</span>LIGHTING RENTAL</div><div><span>🎬</span>AD FILMS</div><div><span>📺</span>DOCUMENTARIES</div><div><span>👥</span>CORPORATE FILMS</div></section><div className="dhc-home-motto">DREAM. CREATE. CAPTURE.</div>
   <section className="dhc-production-band"><FilmVideo src={V.setup}/><div className="dhc-band-shade"/><div className="dhc-band-copy"><span className="eyebrow">01 / Production services</span><p className="serif">Make every<br/><em>frame count.</em></p><span>PRE-PRODUCTION · PRODUCTION · POST</span></div></section>
   <section className="dhc-services wrap"><div className="section-head"><div><span className="eyebrow">Production capabilities</span><h2 className="serif">From brief to<br/><em>final frame.</em></h2></div><span className="eyebrow">01 — Production</span></div><div className="dhc-service-grid">{services.map(([n,t,d])=><motion.article className="dhc-service" key={n} {...reveal}><span>{n} / 04</span><h3 className="serif">{t}</h3><p>{d}</p><a href="mailto:hello@dreamhousecinemas.in?subject=Production%20Enquiry" aria-label={`Enquire about ${t}`}><ArrowUpRight size={18}/></a></motion.article>)}</div></section>
   <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">02 / Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
