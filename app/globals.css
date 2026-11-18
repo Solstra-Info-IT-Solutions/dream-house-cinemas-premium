@@ -1,3 +1,5 @@
+/* Load Playfair Display in the browser; avoids build-time next/font Google fetch failures */
+:root { --font-playfair: "Playfair Display"; }
 
 /* CINEMATIC DIRECTOR'S CUT */
 :root{--black:#050505;--panel:#101010;--paper:#f4f0e9;--muted:#aaa39b;--gold:#c7a46a;--line:rgba(255,255,255,.14)}
