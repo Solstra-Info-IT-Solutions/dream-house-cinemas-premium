@@ -195,3 +195,12 @@
 .dhc-site .source-trust{color:#c6c6c6}
 @media(max-width:900px){.dhc-site .source-page-hero{grid-template-columns:1fr}.dhc-site .nav-links{display:none}.dhc-site .mobile-menu{display:inline-flex}.dhc-site .mobile-panel{display:flex;position:absolute;top:100%;left:0;right:0;width:100%;padding:18px 24px 24px;background:rgba(5,5,5,.98);border-bottom:1px solid #f5b72f;flex-direction:column;gap:0;box-shadow:0 18px 30px rgba(0,0,0,.4)}.dhc-site .mobile-panel a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.dhc-site .mobile-panel a:hover{color:#f5b72f}}
 @media(max-width:560px){.dhc-site .source-page-hero{padding-top:110px;padding-bottom:55px}.dhc-site .source-page-visual{aspect-ratio:4/3}.dhc-site .source-hero-actions{align-items:flex-start;flex-direction:column}.dhc-site .source-form-wrap{padding-inline:18px}.dhc-site .source-contact{padding-inline:18px}.dhc-site .source-work-overlay span{font-size:18px}.dhc-site .dhc-hero-content{padding-top:125px}.dhc-site .dhc-hero-foot{font-size:7px;letter-spacing:.1em}.dhc-site .brand-name{font-size:10px}}
+
+
+/* FINAL TYPOGRAPHY LOCK — Playfair Display across every route and control */
+html, body, .dhc-site, .dhc-site *, .dhc-site *::before, .dhc-site *::after {
+  font-family: var(--font-playfair), Georgia, serif !important;
+}
+.dhc-site input, .dhc-site textarea, .dhc-site select, .dhc-site button {
+  font-family: var(--font-playfair), Georgia, serif !important;
+}

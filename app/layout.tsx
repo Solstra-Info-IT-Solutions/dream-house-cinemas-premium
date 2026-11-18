@@ -5,6 +5,8 @@ import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-playfair",
   display: "swap",
 });
@@ -17,5 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  return <html lang="en"><body className={playfairDisplay.variable}>{children}</body></html>;
+  return <html lang="en"><body className={`${playfairDisplay.className} ${playfairDisplay.variable}`}>{children}</body></html>;
 }
