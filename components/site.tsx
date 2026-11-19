@@ -17,22 +17,14 @@ const P = {
   monitor: "https://images.pexels.com/photos/37893943/pexels-photo-37893943/free-photo-of-professional-film-production-on-set-with-monitor.jpeg?auto=compress&cs=tinysrgb&w=1400",
   camera: "https://images.pexels.com/photos/37593303/pexels-photo-37593303/free-photo-of-professional-film-camera-setup-in-studio-environment.jpeg?auto=compress&cs=tinysrgb&w=1400",
 };
-const categories = [
-  {n:"01",title:"Cinema camera systems",detail:"Production camera bodies, cinema builds and recording accessories.",icon:Camera,image:P.camera},
-  {n:"02",title:"Lenses & filtration",detail:"Lens packages, matte boxes, follow focus and filtration options.",icon:Focus,image:P.rig},
-  {n:"03",title:"Lighting equipment",detail:"Film lights, modifiers, stands and essential lighting control.",icon:Lightbulb,image:P.crew},
-  {n:"04",title:"Grip & camera movement",detail:"Dolly, support, rigging and movement tools for the shot.",icon:Move3D,image:P.dolly},
-  {n:"05",title:"Monitors & video assist",detail:"On-set monitoring, viewing and video-assist essentials.",icon:Monitor,image:P.monitor},
-  {n:"06",title:"Production accessories",detail:"Power, mounting, cables and the practical kit around a camera build.",icon:Radio,image:P.camera},
-];
 const services = [
-  ["01","Ad film production","Creative commercial films built around your brand and audience."],
-  ["02","Documentary production","Documentary storytelling from research and planning to final delivery."],
-  ["03","Corporate films","Professional films for businesses, teams and organisations."],
-  ["04","Brand films","Distinctive visual stories that communicate brand identity."],
-  ["05","Promotional videos","Promotional content for launches, campaigns and marketing."],
-  ["06","Digital & social media","Video content designed for digital and social platforms."],
-  ["07","Production support","Production assistance and support for shoots of every scale."],
+  ["Ad film production","Creative commercial films built around your brand and audience."],
+  ["Documentary production","Documentary storytelling from research and planning to final delivery."],
+  ["Corporate films","Professional films for businesses, teams and organisations."],
+  ["Brand films","Distinctive visual stories that communicate brand identity."],
+  ["Promotional videos","Promotional content for launches, campaigns and marketing."],
+  ["Digital & social media","Video content designed for digital and social platforms."],
+  ["Production support","Production assistance and support for shoots of every scale."],
 ];
 function FilmVideo({src,className="",poster}:{src:string;className?:string;poster?:string}) {
   return <video className={className} autoPlay muted loop playsInline preload="metadata" poster={poster} aria-hidden="true"><source src={src} type="video/mp4"/></video>;
@@ -65,9 +57,9 @@ export function HomePage(){
   </section>
   <section className="dhc-intro wrap" id="production"><div className="dhc-intro-head"><span className="eyebrow">One creative partner. Two production essentials.</span><h2 className="serif">We shape the story.<br/><em>We equip the set.</em></h2></div><div className="dhc-intro-copy"><p className="large">Dream House Cinemas is a Kerala based film production and equipment rental company dedicated to turning ideas into powerful visual stories.</p><p>With a passion for storytelling and a commitment to excellence, we create content that connects, inspires and leaves a lasting impact. From concept development to final delivery, we handle every aspect of production with creativity, precision and professionalism.</p><Link href="/about" className="button-line">Inside Dream House</Link></div></section>
   <section className="dhc-home-service-strip"><div><span>🎥</span>FILM PRODUCTION</div><div><span>📷</span>CAMERA RENTAL</div><div><span>💡</span>LIGHTING RENTAL</div><div><span>🎬</span>AD FILMS</div><div><span>📺</span>DOCUMENTARIES</div><div><span>👥</span>CORPORATE FILMS</div></section><div className="dhc-home-motto">DREAM. CREATE. CAPTURE.</div>
-  <section className="dhc-production-band"><FilmVideo src={V.setup}/><div className="dhc-band-shade"/><div className="dhc-band-copy"><span className="eyebrow">01 / Production services</span><p className="serif">Make every<br/><em>frame count.</em></p><span>PRE-PRODUCTION · PRODUCTION · POST</span></div></section>
-  <section className="dhc-services wrap"><div className="section-head"><div><span className="eyebrow">Production capabilities</span><h2 className="serif">From brief to<br/><em>final frame.</em></h2></div><span className="eyebrow">01 — Production</span></div><div className="dhc-service-grid">{services.map(([n,t,d])=><motion.article className="dhc-service" key={n} {...reveal}><span>{n} / 04</span><h3 className="serif">{t}</h3><p>{d}</p><a href="mailto:hello@dreamhousecinemas.in?subject=Production%20Enquiry" aria-label={`Enquire about ${t}`}></a></motion.article>)}</div></section>
-  <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">02 / Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
+  <section className="dhc-production-band"><FilmVideo src={V.setup}/><div className="dhc-band-shade"/><div className="dhc-band-copy"><span className="eyebrow">Production services</span><p className="serif">Make every<br/><em>frame count.</em></p><span>PRE-PRODUCTION · PRODUCTION · POST</span></div></section>
+  <section className="dhc-services wrap"><div className="section-head"><div><span className="eyebrow">Production capabilities</span><h2 className="serif">From brief to<br/><em>final frame.</em></h2></div></div><div className="dhc-service-grid">{services.map(([t,d])=><motion.article className="dhc-service" key={t} {...reveal}><h3 className="serif">{t}</h3><p>{d}</p><a href="mailto:hello@dreamhousecinemas.in?subject=Production%20Enquiry" aria-label={`Enquire about ${t}`}></a></motion.article>)}</div></section>
+  <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
    <EquipmentCatalogue compact/>
    <div className="dhc-rental-note"><span>NEED A COMPLETE CAMERA PACKAGE?</span><Enquiry label="Request a rental quote"/></div>
   </div></section>
@@ -79,13 +71,13 @@ export function HomePage(){
 
 const SOURCE_ASSET = "https://raw.githubusercontent.com/Solstra-Info-IT-Solutions/dhc-website/main/assets/";
 const sourceServices = [
-  ["01","AD FILM PRODUCTION","Creative commercial films built around your brand and audience."],
-  ["02","DOCUMENTARY PRODUCTION","Documentary storytelling from research and planning to final delivery."],
-  ["03","CORPORATE FILMS","Professional films for businesses, teams and organisations."],
-  ["04","BRAND FILMS","Distinctive visual stories that communicate brand identity."],
-  ["05","PROMOTIONAL VIDEOS","Promotional content for launches, campaigns and marketing."],
-  ["06","DIGITAL & SOCIAL MEDIA","Video content designed for digital and social platforms."],
-  ["07","PRODUCTION SUPPORT","Production assistance and support for shoots of every scale."],
+  ["AD FILM PRODUCTION","Creative commercial films built around your brand and audience."],
+  ["DOCUMENTARY PRODUCTION","Documentary storytelling from research and planning to final delivery."],
+  ["CORPORATE FILMS","Professional films for businesses, teams and organisations."],
+  ["BRAND FILMS","Distinctive visual stories that communicate brand identity."],
+  ["PROMOTIONAL VIDEOS","Promotional content for launches, campaigns and marketing."],
+  ["DIGITAL & SOCIAL MEDIA","Video content designed for digital and social platforms."],
+  ["PRODUCTION SUPPORT","Production assistance and support for shoots of every scale."],
 ];
 
 type EquipmentItem = { name: string; price: number };
@@ -113,7 +105,7 @@ function EquipmentCatalogue({compact=false}:{compact?:boolean}){
    const visible=expanded[group.title]?group.items:group.items.slice(0,6);
    return <section className="dhc-catalogue-category" key={group.title}>
     <div className="dhc-catalogue-heading"><div><span className="eyebrow">Equipment category</span><h3>{group.title}</h3></div><span className="dhc-catalogue-count">{group.items.length} items</span></div>
-    <div className="dhc-catalogue-grid">{visible.map((item,index)=><article className="dhc-catalogue-card" key={item.name}><span className="dhc-catalogue-index">{String(index+1).padStart(2,"0")}</span><h4>{item.name}</h4><div className="dhc-catalogue-card-bottom"><strong>{money(item.price)}</strong><Link href={"/book?type=rental&item="+encodeURIComponent(item.name)}>Add to enquiry</Link></div></article>)}</div>
+    <div className="dhc-catalogue-grid">{visible.map((item,index)=><article className="dhc-catalogue-card" key={item.name}><h4>{item.name}</h4><div className="dhc-catalogue-card-bottom"><strong>{money(item.price)}</strong><Link href={"/book?type=rental&item="+encodeURIComponent(item.name)}>Add to enquiry</Link></div></article>)}</div>
     {group.items.length>6&&<button className="dhc-catalogue-toggle" type="button" aria-expanded={!!expanded[group.title]} onClick={()=>setExpanded(v=>({...v,[group.title]:!v[group.title]}))}>{expanded[group.title]?"View less":"View more"}</button>}
    </section>;
   })}
@@ -125,7 +117,7 @@ function SourcePageHero({eyebrow,title,accent,copy,image}:{eyebrow?:string;title
 }
 export function ProductionPage(){
  return <main className="site-shell dhc-site"><Header/><SourcePageHero title="Production" accent="Services" copy="From Concept to Screen. We Bring Your Vision to Life. Dream House Cinemas provides end-to-end production services for brands, agencies, businesses, filmmakers and organizations. From creative development to final delivery, we handle every step with passion, precision and professional excellence." image="production-sunset.jpg"/>
- <section className="wrap source-content"><div className="eyebrow">— What We Produce —</div><div className="source-service-grid">{sourceServices.map(([n,t,d])=><article key={n}><span>{n} / 07</span><h2 className="serif">{t}</h2><p>{d}</p></article>)}</div><div className="source-bottom-cta"><p>Big or small, every story deserves great production.<br/><em>Let’s create something amazing together.</em></p><Link className="button-gold" href="/book">Start a project with us</Link></div><p className="source-trust">♡ Creative Excellence　 ·　 On-Time Delivery　 ·　 Professional Team　 ·　 End-to-End Support</p></section><Footer/></main>;
+ <section className="wrap source-content"><div className="eyebrow">— What We Produce —</div><div className="source-service-grid">{sourceServices.map(([t,d])=><article key={t}><h2 className="serif">{t}</h2><p>{d}</p></article>)}</div><div className="source-bottom-cta"><p>Big or small, every story deserves great production.<br/><em>Let’s create something amazing together.</em></p><Link className="button-gold" href="/book">Start a project with us</Link></div><p className="source-trust">♡ Creative Excellence　 ·　 On-Time Delivery　 ·　 Professional Team　 ·　 End-to-End Support</p></section><Footer/></main>;
 }
 export function RentalPage(){
  return <main className="site-shell dhc-site"><Header/><SourcePageHero title="Equipment" accent="Rental" copy="Professional Gear. For Every Vision. High quality camera, lighting and grip equipment for films, commercials, documentaries, corporate videos and digital content. Reliable gear. Expert support. On time, every time." image="rental-flatlay.jpg"/>
@@ -136,7 +128,7 @@ const workItems=[
 ];
 export function WorksPage(){
  const [filter,setFilter]=useState("all");
- return <main className="site-shell dhc-site"><Header/><section className="wrap source-works"><div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the kinds of stories and visual projects Dream House Cinemas creates.</p></div><div className="source-filter">{[["all","ALL"],["ad","AD FILMS"],["doc","DOCUMENTARIES"],["corp","CORPORATE FILMS"],["brand","BRAND FILMS"],["promo","PROMOTIONAL"]].map(([v,t])=><button key={v} onClick={()=>setFilter(v)} className={filter===v?"active":""}>{t}</button>)}</div><div className="source-work-grid">{workItems.filter(([cat])=>filter==="all"||filter===cat).map(([cat,label,img],i)=><article key={img}><img src={SOURCE_ASSET+img} alt={label} loading="lazy"/><div className="source-work-overlay"><small>0{(i+1)} / DHC PORTFOLIO</small><span>{label}</span></div><i aria-hidden="true"></i></article>)}</div><p className="source-disclaimer">Project imagery shown as portfolio category previews. Actual project films can be added when the client’s final reel links are supplied.</p></section><Footer/></main>;
+ return <main className="site-shell dhc-site"><Header/><section className="wrap source-works"><div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the kinds of stories and visual projects Dream House Cinemas creates.</p></div><div className="source-filter">{[["all","ALL"],["ad","AD FILMS"],["doc","DOCUMENTARIES"],["corp","CORPORATE FILMS"],["brand","BRAND FILMS"],["promo","PROMOTIONAL"]].map(([v,t])=><button key={v} onClick={()=>setFilter(v)} className={filter===v?"active":""}>{t}</button>)}</div><div className="source-work-grid">{workItems.filter(([cat])=>filter==="all"||filter===cat).map(([cat,label,img],i)=><article key={img}><img src={SOURCE_ASSET+img} alt={label} loading="lazy"/><div className="source-work-overlay"><span>{label}</span></div><i aria-hidden="true"></i></article>)}</div><p className="source-disclaimer">Project imagery shown as portfolio category previews. Actual project films can be added when the client’s final reel links are supplied.</p></section><Footer/></main>;
 }
 export function BookPage(){
  const [kind,setKind]=useState("production");
