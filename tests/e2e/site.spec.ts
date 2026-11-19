@@ -22,7 +22,7 @@ test.describe("route smoke and responsive overflow", () => {
           `horizontal overflow on ${route} at ${width}px: ${JSON.stringify(dimensions)}`,
         ).toBeLessThanOrEqual(dimensions.viewport + 2);
         if (width === 390 || width === 1440) {
-          const hiddenRevealTargets = page.locator('main [style*="opacity: 0"]');
+          const hiddenRevealTargets = page.locator('main [style*="opacity:0"], main [style*="opacity: 0"]');
           for (let revealIndex = 0; revealIndex < 40; revealIndex += 1) {
             if (await hiddenRevealTargets.count() === 0) break;
             await hiddenRevealTargets.first().scrollIntoViewIfNeeded();
