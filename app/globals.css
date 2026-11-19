@@ -1271,3 +1271,29 @@ html, body, button, input, textarea, select, option {
     word-break: normal !important;
   }
 }
+
+
+/* Booking rows use flex rather than nested grid tracks to keep the item name elastic. */
+.dhc-site .dhc-booking-picker label {
+  display: flex !important;
+  align-items: center;
+  width: 100% !important;
+  min-width: 0;
+  gap: 9px !important;
+}
+.dhc-site .dhc-booking-picker label input[type="checkbox"] {
+  flex: 0 0 16px !important;
+}
+.dhc-site .dhc-booking-picker label span {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+.dhc-site .dhc-booking-picker label strong {
+  flex: 0 0 auto;
+  margin-left: auto;
+  white-space: nowrap;
+}
