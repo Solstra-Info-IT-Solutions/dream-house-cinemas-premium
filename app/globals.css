@@ -374,7 +374,7 @@ button, input, textarea, select, option {
 
 /* FINAL DESIGN SYSTEM OVERRIDES — one typeface, compact navigation, precise rhythm */
 :root {
-  --dhc-font: "Playfair Display", Georgia, serif;
+  --dhc-font: "Playfair Display";
   --dhc-gold: #f5b72f;
   --dhc-radius: 9px;
 }
