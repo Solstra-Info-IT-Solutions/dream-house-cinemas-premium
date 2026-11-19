@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateEquipmentEstimate, equipmentGroups, isKnownEquipmentItem, money } from "../lib/equipment";
+import { calculateEquipmentEstimate, equipmentGroups, isKnownEquipmentItem, money } from "../../lib/equipment";
 
 describe("equipment inventory", () => {
   it("contains the two expected equipment categories", () => {
