@@ -154,7 +154,7 @@ test("security response headers are present on public routes", async ({ request 
 });
 
 test("the declared typography uses Playfair Display only", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/book?type=rental");
   const selectors = [".brand-name", "main h1", "main p", "button", "a", "input", "textarea"];
   for (const selector of selectors) {
     const locator = page.locator(selector).first();
