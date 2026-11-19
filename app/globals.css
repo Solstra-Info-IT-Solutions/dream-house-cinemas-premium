@@ -1310,3 +1310,13 @@ button, input, textarea, select, option {
 .dhc-site .source-form-wrap {
   overflow: visible;
 }
+
+/* The shell is the same element as .dhc-site; allow vertical content to remain visible. */
+.dhc-site.site-shell {
+  overflow-x: clip;
+  overflow-y: visible;
+  contain: none;
+}
+.dhc-site.site-shell::before {
+  pointer-events: none;
+}
