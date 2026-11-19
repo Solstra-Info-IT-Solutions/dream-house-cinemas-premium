@@ -17,6 +17,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run lint
       - run: npm run build
+      - run: npm run test:unit
       - run: npm run test:e2e
       - name: Upload Playwright report
         if: always()
