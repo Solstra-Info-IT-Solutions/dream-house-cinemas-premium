@@ -16,7 +16,7 @@ export const equipmentGroups: { title: string; items: EquipmentItem[] }[] = [
   {name:"Generator",price:800},{name:"Track and trolley",price:400}
  ]}
 ];
-const money = (amount:number) => "₹"+amount.toLocaleString("en-IN");
+export const money = (amount:number) => "₹"+amount.toLocaleString("en-IN");
 
 export const getAllEquipment = (): EquipmentItem[] =>
   equipmentGroups.flatMap((group) => group.items);
