@@ -1310,3 +1310,36 @@ html, body, button, input, textarea, select, option {
     letter-spacing: .05em !important;
   }
 }
+
+
+/* Keep the brand lockup and compact hamburger control from colliding on mobile. */
+@media (max-width: 560px) {
+  .dhc-site .dhc-nav .brand {
+    min-width: 0;
+    gap: 8px;
+  }
+  .dhc-site .dhc-nav .brand-name {
+    max-width: 160px;
+    line-height: 1.1;
+    font-size: .8rem !important;
+    letter-spacing: .025em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    display: block;
+    max-width: 160px;
+    white-space: normal !important;
+    line-height: 1.15;
+    font-size: .64rem !important;
+    letter-spacing: .035em !important;
+  }
+  .dhc-site .dhc-nav .mobile-menu {
+    flex: 0 0 48px;
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 44px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
