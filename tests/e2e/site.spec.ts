@@ -100,10 +100,23 @@ test("booking checkboxes render at the intended compact size", async ({ page }, 
   const checkbox = page.locator('.dhc-booking-picker input[type="checkbox"]').first();
   const size = await checkbox.evaluate((element) => {
     const rect = element.getBoundingClientRect();
-    return { width: rect.width, height: rect.height };
+    const label = element.closest("label")!;
+    const name = label.querySelector("span")!;
+    const nameRect = name.getBoundingClientRect();
+    return {
+      width: rect.width,
+      height: rect.height,
+      labelWidth: label.getBoundingClientRect().width,
+      nameWidth: nameRect.width,
+      nameScrollWidth: name.scrollWidth,
+      nameClientWidth: name.clientWidth,
+    };
   });
   expect(size.width).toBe(16);
   expect(size.height).toBe(16);
+  expect(size.labelWidth).toBeGreaterThan(250);
+  expect(size.nameWidth).toBeGreaterThan(120);
+  expect(size.nameScrollWidth).toBeLessThanOrEqual(size.nameClientWidth + 1);
   await page.screenshot({
     path: testInfo.outputPath("booking-rental-picker-390.png"),
     fullPage: true,
