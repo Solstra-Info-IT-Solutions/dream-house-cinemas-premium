@@ -1,9 +1,12 @@
 name: Validate Next.js
 on:
   push:
-    branches: [main, qa/deep-quality-assurance]
+    branches: [main]
   pull_request:
     branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   quality:
     runs-on: ubuntu-latest
