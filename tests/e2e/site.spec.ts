@@ -137,3 +137,14 @@ test("key pages meet automated WCAG 2.2 AA accessibility checks", async ({ page 
     ).toEqual([]);
   }
 });
+
+test("security response headers are present on public routes", async ({ request }) => {
+  const response = await request.get("/");
+  expect(response.status()).toBe(200);
+  const headers = response.headers();
+  expect(headers["x-content-type-options"]).toBe("nosniff");
+  expect(headers["x-frame-options"]).toBe("SAMEORIGIN");
+  expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(headers["strict-transport-security"]).toContain("max-age=63072000");
+  expect(headers["permissions-policy"]).toContain("camera=()");
+});
