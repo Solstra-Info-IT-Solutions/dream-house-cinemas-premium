@@ -118,3 +118,22 @@ test("equipment checkboxes remain compact and have visible focus styles", async 
   await checkbox.focus();
   await expect(checkbox).toBeFocused();
 });
+
+test("key pages meet automated WCAG 2.2 AA accessibility checks", async ({ page }) => {
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  for (const route of ["/", "/about", "/production", "/rental", "/works", "/book", "/contact"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(
+      results.violations.map((violation) => ({
+        id: violation.id,
+        impact: violation.impact,
+        description: violation.description,
+        nodes: violation.nodes.map((node) => ({ target: node.target, summary: node.failureSummary })),
+      })),
+      `Accessibility violations on ${route}`,
+    ).toEqual([]);
+  }
+});
