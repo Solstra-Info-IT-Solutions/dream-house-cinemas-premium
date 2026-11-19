@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run tests/unit"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
