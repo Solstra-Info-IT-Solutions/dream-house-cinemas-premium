@@ -230,7 +230,7 @@ button, input, textarea, select, option {
 /* Scroll reveal should fade, not translate text through clipped line boxes. */
 .dhc-site .dhc-service, .dhc-site .dhc-equipment-card { will-change: opacity; }
 @media (max-width: 1200px) {
- .dhc-site .nav-links { gap: 12px; font-size: 11px; }
+ .dhc-site .nav-links { gap: 10px; font-size: 12px; }
  .dhc-site .brand-name { font-size: 12px; }
 }
 @media (max-width: 900px) {
@@ -244,3 +244,6 @@ button, input, textarea, select, option {
  .dhc-site .brand-name { font-size: 11px; }
  .dhc-site .brand-name small { font-size: 8px; }
 }
+
+/* Keep vertical scroll content outside the shell's horizontal clipping boundary. */
+.dhc-site.site-shell { overflow-x: clip; overflow-y: visible; }
