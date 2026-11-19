@@ -59,8 +59,11 @@ test("rental catalogue expands and collapses without losing items", async ({ pag
   await page.goto("/rental");
   const cards = page.locator(".dhc-catalogue-card");
   await expect(cards).toHaveCount(9);
-  await page.getByRole("button", { name: "View more" }).click();
+  const more = page.getByRole("button", { name: "View more" });
+  await expect(more).toHaveAttribute("aria-expanded", "false");
+  await more.click();
   await expect(cards).toHaveCount(23);
+  await expect(page.getByRole("button", { name: "View less" })).toHaveAttribute("aria-expanded", "true");
   await page.getByRole("button", { name: "View less" }).click();
   await expect(cards).toHaveCount(9);
 });
@@ -68,9 +71,13 @@ test("rental catalogue expands and collapses without losing items", async ({ pag
 test("work filters show only the selected portfolio category", async ({ page }) => {
   await page.goto("/works");
   await expect(page.locator(".source-work-grid article")).toHaveCount(9);
-  await page.getByRole("button", { name: "DOCUMENTARIES" }).click();
+  const documentaries = page.getByRole("button", { name: "DOCUMENTARIES" });
+  await documentaries.click();
+  await expect(documentaries).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".source-work-grid article")).toHaveCount(2);
-  await page.getByRole("button", { name: "ALL" }).click();
+  const all = page.getByRole("button", { name: "ALL" });
+  await all.click();
+  await expect(all).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".source-work-grid article")).toHaveCount(9);
 });
 
