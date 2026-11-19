@@ -22,14 +22,17 @@ test.describe("route smoke and responsive overflow", () => {
           `horizontal overflow on ${route} at ${width}px: ${JSON.stringify(dimensions)}`,
         ).toBeLessThanOrEqual(dimensions.viewport + 2);
         if (width === 390 || width === 1440) {
-          const hiddenRevealTargets = page.locator('main [style*="opacity:0"], main [style*="opacity: 0"]');
-          for (let revealIndex = 0; revealIndex < 40; revealIndex += 1) {
-            if (await hiddenRevealTargets.count() === 0) break;
-            await hiddenRevealTargets.first().scrollIntoViewIfNeeded();
-            await page.waitForTimeout(140);
-          }
-          await page.evaluate(() => window.scrollTo(0, 0));
-          await page.waitForTimeout(800);
+          // Reveal motion-only content for the static visual baseline; live scroll behaviour
+          // is tested separately with a real scroll interaction.
+          await page.addStyleTag({
+            content: `
+              main [style*="opacity:0"],
+              main [style*="opacity: 0"] {
+                opacity: 1 !important;
+                transform: none !important;
+              }
+            `,
+          });
           const routeName = route === "/" ? "home" : route.slice(1);
           await page.screenshot({
             path: testInfo.outputPath(`${routeName}-${width}.jpg`),
