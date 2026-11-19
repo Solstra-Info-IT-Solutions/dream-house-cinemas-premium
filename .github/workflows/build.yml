@@ -18,7 +18,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('package.json') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('package.json') }}-
-      - run: npm install
+      - run: npm install --no-audit --no-fund
       - name: Dependency security audit
         run: npm audit --audit-level=low
       - run: npm run lint
