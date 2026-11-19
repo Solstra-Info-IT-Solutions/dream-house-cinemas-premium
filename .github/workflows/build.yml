@@ -1,16 +1,31 @@
 name: Validate Next.js
 on:
   push:
-    branches: [main]
+    branches: [main, qa/deep-quality-assurance]
   pull_request:
     branches: [main]
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
       - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - run: npm run lint
       - run: npm run build
+      - run: npm run test:e2e
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
