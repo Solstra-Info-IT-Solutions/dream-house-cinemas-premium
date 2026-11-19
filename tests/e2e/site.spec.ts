@@ -114,8 +114,8 @@ test("booking tabs expose their selected state accessibly", async ({ page }) => 
   await expect(production).toHaveAttribute("aria-pressed", "false");
 });
 
-for (const route of ["/", "/book", "/contact"]) {
-  test(`${route} has no serious or critical automated accessibility violations`, async ({ page }) => {
+for (const route of routes) {
+  test(`${route} has no automated WCAG 2.2 AA accessibility violations`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
