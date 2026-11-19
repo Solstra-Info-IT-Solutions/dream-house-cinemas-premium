@@ -32,7 +32,9 @@ test.describe("route smoke and responsive overflow", () => {
           await page.waitForTimeout(800);
           const routeName = route === "/" ? "home" : route.slice(1);
           await page.screenshot({
-            path: testInfo.outputPath(`${routeName}-${width}.png`),
+            path: testInfo.outputPath(`${routeName}-${width}.jpg`),
+            type: "jpeg",
+            quality: 65,
             fullPage: true,
             animations: "disabled",
           });
@@ -123,7 +125,9 @@ test("booking checkboxes render at the intended compact size", async ({ page }, 
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({
-    path: testInfo.outputPath("booking-rental-picker-390.png"),
+    path: testInfo.outputPath("booking-rental-picker-390.jpg"),
+    type: "jpeg",
+    quality: 70,
     fullPage: true,
     animations: "disabled",
   });
@@ -305,7 +309,7 @@ test("desktop primary navigation links target the correct routes", async ({ page
     ["Contact", "/contact"],
     ["Book Now", "/book"],
   ]) {
-    await expect(nav.getByRole("link", { name: label }).first()).toHaveAttribute("href", href);
+    await expect(nav.getByRole("link", { name: label, exact: true }).first()).toHaveAttribute("href", href);
   }
 });
 
