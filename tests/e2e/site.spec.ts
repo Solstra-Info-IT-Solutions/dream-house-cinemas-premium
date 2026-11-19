@@ -193,3 +193,14 @@ test("all primary interface text uses the single Playfair Display family", async
     expect(family).toBe('"Playfair Display"');
   }
 });
+
+
+test("scroll-reveal service cards become visible when they enter the viewport", async ({ page }) => {
+  await page.goto("/");
+  const firstService = page.locator(".dhc-service").first();
+  await firstService.scrollIntoViewIfNeeded();
+  await expect.poll(
+    () => firstService.evaluate((element) => Number(getComputedStyle(element).opacity)),
+    { message: "service card should reveal on scroll", timeout: 5_000 },
+  ).toBe(1);
+});
