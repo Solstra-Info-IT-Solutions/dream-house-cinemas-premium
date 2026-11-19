@@ -1,9 +1,8 @@
 name: Validate Next.js and browser journeys
 on:
-  push:
-    branches: [main, "qa/**"]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 jobs:
   quality:
     runs-on: ubuntu-latest
