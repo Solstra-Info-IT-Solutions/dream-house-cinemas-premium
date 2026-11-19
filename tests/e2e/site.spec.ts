@@ -273,3 +273,29 @@ test("Book Now remains readable on hover and has no arrow glyph", async ({ page 
   expect(styles.color).not.toBe("rgba(0, 0, 0, 0)");
   expect(styles.text).not.toMatch(/[→➜➝➤]/);
 });
+
+
+test("desktop primary navigation links target the correct routes", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const nav = page.locator(".dhc-nav");
+  for (const [label, href] of [
+    ["About", "/about"],
+    ["Production", "/production"],
+    ["Rental", "/rental"],
+    ["Works", "/works"],
+    ["Contact", "/contact"],
+    ["Book Now", "/book"],
+  ]) {
+    await expect(nav.getByRole("link", { name: label }).first()).toHaveAttribute("href", href);
+  }
+});
+
+test("email fields reject malformed addresses with native validation", async ({ page }) => {
+  await page.goto("/contact");
+  const email = page.getByRole("textbox", { name: "Email address" });
+  await email.fill("not-an-email");
+  expect(await email.evaluate((element: HTMLInputElement) => element.validity.typeMismatch)).toBe(true);
+  await email.fill("client@example.com");
+  expect(await email.evaluate((element: HTMLInputElement) => element.validity.typeMismatch)).toBe(false);
+});
