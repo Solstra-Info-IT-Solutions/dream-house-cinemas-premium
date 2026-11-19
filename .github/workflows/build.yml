@@ -18,7 +18,7 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npm audit --audit-level=high
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install chromium
       - run: npm run lint
       - run: npm run build
       - run: npm run test:unit
