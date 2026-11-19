@@ -1297,3 +1297,16 @@ html, body, button, input, textarea, select, option {
   margin-left: auto;
   white-space: nowrap;
 }
+
+
+/* Header brand lockup stays legible on narrow devices. */
+@media (max-width: 560px) {
+  .dhc-site .dhc-nav .brand-name {
+    font-size: .82rem !important;
+    letter-spacing: .04em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    font-size: .66rem !important;
+    letter-spacing: .05em !important;
+  }
+}
