@@ -22,15 +22,14 @@ test.describe("route smoke and responsive overflow", () => {
           `horizontal overflow on ${route} at ${width}px: ${JSON.stringify(dimensions)}`,
         ).toBeLessThanOrEqual(dimensions.viewport + 2);
         if (width === 390 || width === 1440) {
-          await page.evaluate(async () => {
-            const step = Math.max(280, window.innerHeight * 0.75);
-            for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
-              window.scrollTo(0, y);
-              await new Promise((resolve) => setTimeout(resolve, 45));
-            }
-            window.scrollTo(0, 0);
-          });
-          await page.waitForTimeout(750);
+          const hiddenRevealTargets = page.locator('main [style*="opacity: 0"]');
+          for (let revealIndex = 0; revealIndex < 40; revealIndex += 1) {
+            if (await hiddenRevealTargets.count() === 0) break;
+            await hiddenRevealTargets.first().scrollIntoViewIfNeeded();
+            await page.waitForTimeout(140);
+          }
+          await page.evaluate(() => window.scrollTo(0, 0));
+          await page.waitForTimeout(800);
           const routeName = route === "/" ? "home" : route.slice(1);
           await page.screenshot({
             path: testInfo.outputPath(`${routeName}-${width}.png`),
