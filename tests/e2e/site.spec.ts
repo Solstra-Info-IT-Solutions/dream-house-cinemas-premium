@@ -191,3 +191,37 @@ test("work portfolio filters show the expected project categories", async ({ pag
   await page.getByRole("button", { name: "ALL" }).click();
   await expect(cards).toHaveCount(9);
 });
+
+test("catalogue titles, prices and enquiry links never overlap at narrow and desktop widths", async ({ page }) => {
+  await page.goto("/rental");
+  for (const width of [320, 360, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    const card = page.locator(".dhc-catalogue-card").first();
+    const title = await card.locator("h4").boundingBox();
+    const bottom = await card.locator(".dhc-catalogue-card-bottom").boundingBox();
+    const price = await card.locator("strong").boundingBox();
+    const action = await card.getByRole("link", { name: "Add to enquiry" }).boundingBox();
+    expect(title && bottom && price && action).toBeTruthy();
+    expect(title!.bottom).toBeLessThanOrEqual(bottom!.y + 1);
+    expect(price!.right).toBeLessThanOrEqual(action!.x + 1);
+    expect(action!.right).toBeLessThanOrEqual(bottom!.right + 1);
+  }
+});
+
+test("booking checkbox rows keep text and prices in separate non-overlapping tracks", async ({ page }) => {
+  await page.goto("/book?type=rental");
+  await expect(page.locator(".dhc-booking-picker label").first()).toBeVisible();
+  for (const width of [320, 360, 390, 480, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    const row = page.locator(".dhc-booking-picker label").first();
+    const checkbox = await row.locator("input[type=checkbox]").boundingBox();
+    const name = await row.locator("span").boundingBox();
+    const price = await row.locator("strong").boundingBox();
+    expect(checkbox && name && price).toBeTruthy();
+    expect(checkbox!.width).toBe(16);
+    expect(checkbox!.height).toBe(16);
+    expect(checkbox!.right).toBeLessThanOrEqual(name!.x + 1);
+    expect(name!.right).toBeLessThanOrEqual(price!.x + 1);
+    expect(price!.right).toBeLessThanOrEqual((await row.boundingBox())!.right + 1);
+  }
+});
