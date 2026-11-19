@@ -27,6 +27,19 @@ for (const route of routes) {
         `${route} overflows at ${width}px: ${JSON.stringify(dimensions)}`,
       ).toBeLessThanOrEqual(dimensions.viewport + 1);
     }
+    for (const viewport of [{ width: 844, height: 390 }, { width: 932, height: 430 }]) {
+      await page.setViewportSize(viewport);
+      await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())));
+      const dimensions = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        document: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+      }));
+      expect(
+        Math.max(dimensions.document, dimensions.body),
+        `${route} overflows in landscape at ${viewport.width}x${viewport.height}`,
+      ).toBeLessThanOrEqual(dimensions.viewport + 1);
+    }
   });
 }
 
