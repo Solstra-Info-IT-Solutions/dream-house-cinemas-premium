@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Aperture, ArrowDown, Camera, Clapperboard, Menu, Video as VideoIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { calculateEquipmentEstimate, equipmentGroups, money } from "@/lib/equipment";
 
 const V = {
   hero: "https://videos.pexels.com/video-files/36604690/15520309_1920_1080_25fps.mp4",
@@ -80,24 +81,6 @@ const sourceServices = [
   ["PRODUCTION SUPPORT","Production assistance and support for shoots of every scale."],
 ];
 
-type EquipmentItem = { name: string; price: number };
-const equipmentGroups: { title: string; items: EquipmentItem[] }[] = [
- { title: "Camera", items: [
-  {name:"S1H camera body",price:2000},
-  {name:"Sigma 24-70 lens",price:800},
-  {name:"Zhiyun Crane 3S gimbal",price:1000},
- ]},
- { title: "Lights", items: [
-  {name:"Nanlight 500",price:600},{name:"300",price:400},{name:"Other LED light",price:400},
-  {name:"RGB tube (one tube)",price:500},{name:"Aperture 1200",price:1500},{name:"Baby 1000",price:250},
-  {name:"Baby 800",price:250},{name:"Baby 350",price:200},{name:"Baby 150",price:150},
-  {name:"One KV",price:150},{name:"Two KV",price:200},{name:"Cool light",price:300},
-  {name:"C stand",price:150},{name:"Jumbo stand",price:250},{name:"All frames",price:500},
-  {name:"White clothes",price:100},{name:"Black clothes",price:100},{name:"Skimmer 12×12",price:200},
-  {name:"Generator",price:800},{name:"Track and trolley",price:400}
- ]}
-];
-const money = (amount:number) => "₹"+amount.toLocaleString("en-IN");
 function EquipmentCatalogue({compact=false}:{compact?:boolean}){
  const [expanded,setExpanded]=useState<Record<string,boolean>>({});
  return <div className={compact?"dhc-catalogue dhc-catalogue-compact":"dhc-catalogue"}>
@@ -135,7 +118,7 @@ export function BookPage(){
  const [selectedItems,setSelectedItems]=useState<string[]>([]);
  useEffect(()=>{const params=new URLSearchParams(window.location.search);if(params.get("type")==="rental")setKind("rental");const item=params.get("item");if(item)setSelectedItems([item]);},[]);
  const toggleItem=(name:string)=>setSelectedItems(items=>items.includes(name)?items.filter(item=>item!==name):[...items,name]);
- const estimate=equipmentGroups.flatMap(group=>group.items).filter(item=>selectedItems.includes(item.name)).reduce((sum,item)=>sum+item.price,0);
+ const estimate=calculateEquipmentEstimate(selectedItems);
  return <main className="site-shell dhc-site"><Header/><section className="source-form-wrap"><div className="eyebrow">— Let’s Create Together —</div><h1 className="serif">Tell us about <em>your project</em></h1><p>We’re here to bring your vision to life.</p><div className="source-tabs" role="group" aria-label="Enquiry type"><button type="button" aria-pressed={kind==="production"} className={kind==="production"?"active":""} onClick={()=>setKind("production")}>Production Enquiry</button><button type="button" aria-pressed={kind==="rental"} className={kind==="rental"?"active":""} onClick={()=>setKind("rental")}>Equipment Rental Request</button></div><form action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain" className="source-form"><input name="Enquiry type" type="hidden" value={kind}/><input name="Selected equipment" type="hidden" value={selectedItems.join(", ")}/><input name="Indicative equipment total" type="hidden" value={money(estimate)}/><input name="Name" placeholder="Your Name *" aria-label="Your name" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" aria-label="Phone or WhatsApp number" required/><input name="Email" type="email" placeholder="Email Address *" aria-label="Email address" required/><input name="Project type" placeholder="Project Type *" aria-label="Project type" required/><input name="Shoot location" placeholder="Shoot Location *" aria-label="Shoot location" required/><input name="Shoot date" type="date" aria-label="Expected Shoot Date"/><input name="Budget" placeholder="Budget Range (Optional)" aria-label="Budget range (optional)"/>{kind==="rental"&&<div className="dhc-booking-picker"><h2>Select equipment</h2><p>Select the items you want to enquire about. Final availability and quotation will be confirmed by our team.</p>{equipmentGroups.map(group=><fieldset key={group.title}><legend>{group.title}</legend>{group.items.map(item=><label key={item.name}><input type="checkbox" checked={selectedItems.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><strong>{money(item.price)}</strong></label>)}</fieldset>)}<div className="dhc-booking-estimate"><span>{selectedItems.length} item(s) selected · indicative total</span><strong>{money(estimate)}</strong></div></div>}<textarea name="Brief" placeholder="Tell us about your project * (Brief about your project, script, requirements, number of shoot days, etc.)" aria-label="Project brief" required/><button className="button-gold" type="submit">Submit Enquiry</button><small>Listed prices are indicative; availability, rental duration and final quotation will be confirmed by Dream House Cinemas.</small></form></section><Footer/></main>;
 }
 export function ContactPage(){
