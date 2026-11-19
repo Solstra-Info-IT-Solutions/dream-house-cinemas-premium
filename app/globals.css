@@ -207,3 +207,40 @@
 button, input, textarea, select, option {
   font-family: "Playfair Display" !important;
 }
+
+
+/* CLIENT FEEDBACK — legible navigation and scroll-safe text */
+.dhc-site .nav { min-height: 92px; height: 92px; padding-inline: clamp(22px, 3.4vw, 56px); }
+.dhc-site .nav-links { gap: clamp(14px, 1.6vw, 26px); font-size: clamp(12px, .92vw, 14px); line-height: 1.45; letter-spacing: .07em; }
+.dhc-site .nav-links a { white-space: nowrap; }
+.dhc-site .nav-cta { font-size: 12px; line-height: 1.35; padding: 13px 18px; letter-spacing: .08em; }
+.dhc-site .brand-mark.dhc-logo-wrap { width: 58px; height: 58px; min-width: 58px; border: 0; background: transparent; padding: 0; overflow: visible; }
+.dhc-site .dhc-logo-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.dhc-site .brand-name { font-size: 14px; line-height: 1.35; letter-spacing: .09em; }
+.dhc-site .brand-name small { font-size: 10px; line-height: 1.4; letter-spacing: .12em; }
+.dhc-site .mobile-panel a { font-size: 14px; line-height: 1.5; padding: 16px 0; }
+.dhc-site .footer .brand-mark.dhc-logo-wrap { width: 64px; height: 64px; }
+.dhc-site .footer-note, .dhc-site .footer-contact { font-size: 12px; line-height: 1.6; }
+.dhc-site .eyebrow { font-size: 11px; line-height: 1.55; }
+.dhc-site .dhc-hero-content h1 { line-height: 1.04; padding-block: .04em .12em; }
+.dhc-site h1, .dhc-site h2, .dhc-site h3, .dhc-site p, .dhc-site a, .dhc-site span { overflow-wrap: anywhere; }
+.dhc-site .dhc-service h3, .dhc-site .dhc-equipment-info h3, .dhc-site .source-service-grid h2 { line-height: 1.28; padding-block: .04em .08em; }
+.dhc-site .source-page-hero h1, .dhc-site .source-works h1, .dhc-site .source-form-wrap h1, .dhc-site .source-contact h1 { line-height: 1.12; padding-block: .04em .12em; }
+.dhc-site .dhc-about-hero h1, .dhc-site .dhc-about-story h2, .dhc-site .dhc-contact h2 { line-height: 1.08; padding-block: .04em .12em; }
+/* Scroll reveal should fade, not translate text through clipped line boxes. */
+.dhc-site .dhc-service, .dhc-site .dhc-equipment-card { will-change: opacity; }
+@media (max-width: 1200px) {
+ .dhc-site .nav-links { gap: 12px; font-size: 11px; }
+ .dhc-site .brand-name { font-size: 12px; }
+}
+@media (max-width: 900px) {
+ .dhc-site .nav { height: 80px; min-height: 80px; }
+ .dhc-site .brand-name { font-size: 13px; }
+ .dhc-site .brand-name small { font-size: 9px; }
+}
+@media (max-width: 560px) {
+ .dhc-site .nav { padding-inline: 18px; }
+ .dhc-site .brand-mark.dhc-logo-wrap { width: 48px; height: 48px; min-width: 48px; }
+ .dhc-site .brand-name { font-size: 11px; }
+ .dhc-site .brand-name small { font-size: 8px; }
+}
