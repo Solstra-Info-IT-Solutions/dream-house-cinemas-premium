@@ -2,7 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Aperture, ArrowDown, ArrowUpRight, Camera, Clapperboard, Focus, Lightbulb, Menu, Monitor, Move3D, Radio, Video as VideoIcon, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const V = {
   hero: "https://videos.pexels.com/video-files/36604690/15520309_1920_1080_25fps.mp4",
@@ -17,35 +17,14 @@ const P = {
   monitor: "https://images.pexels.com/photos/37893943/pexels-photo-37893943/free-photo-of-professional-film-production-on-set-with-monitor.jpeg?auto=compress&cs=tinysrgb&w=1400",
   camera: "https://images.pexels.com/photos/37593303/pexels-photo-37593303/free-photo-of-professional-film-camera-setup-in-studio-environment.jpeg?auto=compress&cs=tinysrgb&w=1400",
 };
-const equipment = {
-  camera: [
-    { name: "S1H camera body", price: 2000 },
-    { name: "Sigma 24-70 lens", price: 800 },
-    { name: "Zhiyun Crane 3S gimbal", price: 1000 },
-  ],
-  lights: [
-    { name: "Nanlight 500", price: 600 },
-    { name: "300", price: 400 },
-    { name: "Other LED light", price: 400 },
-    { name: "RGB tube (one tube)", price: 500 },
-    { name: "Aperture 1200", price: 1500 },
-    { name: "Baby 1000", price: 250 },
-    { name: "Baby 800", price: 250 },
-    { name: "Baby 350", price: 200 },
-    { name: "Baby 150", price: 150 },
-    { name: "One KV", price: 150 },
-    { name: "Two KV", price: 200 },
-    { name: "Cool light", price: 300 },
-    { name: "C stand", price: 150 },
-    { name: "Jumbo stand", price: 250 },
-    { name: "All frames", price: 500 },
-    { name: "White clothes", price: 100 },
-    { name: "Black clothes", price: 100 },
-    { name: "Skimmer 12×12", price: 200 },
-    { name: "Generator", price: 800 },
-    { name: "Track and trolley", price: 400 },
-  ],
-};
+const categories = [
+  {n:"01",title:"Cinema camera systems",detail:"Production camera bodies, cinema builds and recording accessories.",icon:Camera,image:P.camera},
+  {n:"02",title:"Lenses & filtration",detail:"Lens packages, matte boxes, follow focus and filtration options.",icon:Focus,image:P.rig},
+  {n:"03",title:"Lighting equipment",detail:"Film lights, modifiers, stands and essential lighting control.",icon:Lightbulb,image:P.crew},
+  {n:"04",title:"Grip & camera movement",detail:"Dolly, support, rigging and movement tools for the shot.",icon:Move3D,image:P.dolly},
+  {n:"05",title:"Monitors & video assist",detail:"On-set monitoring, viewing and video-assist essentials.",icon:Monitor,image:P.monitor},
+  {n:"06",title:"Production accessories",detail:"Power, mounting, cables and the practical kit around a camera build.",icon:Radio,image:P.camera},
+];
 const services = [
   ["01","Ad film production","Creative commercial films built around your brand and audience."],
   ["02","Documentary production","Documentary storytelling from research and planning to final delivery."],
@@ -70,8 +49,6 @@ function Footer(){return <footer className="footer"><div className="wrap footer-
 const reveal={initial:{opacity:0},whileInView:{opacity:1},viewport:{once:true,amount:.12},transition:{duration:.65,ease:[.22,1,.36,1]} as const};
 function Enquiry({label="Discuss your production"}:{label?:string}){return <a className="button-gold" href={`mailto:hello@dreamhousecinemas.in?subject=${encodeURIComponent(label)}`}>{label}<ArrowUpRight size={15}/></a>}
 export function HomePage(){
- const [showAllCamera,setShowAllCamera]=useState(false);
- const [showAllLights,setShowAllLights]=useState(false);
  const heroRef=useRef<HTMLElement>(null);
  const {scrollYProgress}=useScroll({target:heroRef,offset:["start start","end start"]});
  const y=useTransform(scrollYProgress,[0,1],["0%","18%"]);
@@ -91,16 +68,7 @@ export function HomePage(){
   <section className="dhc-production-band"><FilmVideo src={V.setup}/><div className="dhc-band-shade"/><div className="dhc-band-copy"><span className="eyebrow">01 / Production services</span><p className="serif">Make every<br/><em>frame count.</em></p><span>PRE-PRODUCTION · PRODUCTION · POST</span></div></section>
   <section className="dhc-services wrap"><div className="section-head"><div><span className="eyebrow">Production capabilities</span><h2 className="serif">From brief to<br/><em>final frame.</em></h2></div><span className="eyebrow">01 — Production</span></div><div className="dhc-service-grid">{services.map(([n,t,d])=><motion.article className="dhc-service" key={n} {...reveal}><span>{n} / 04</span><h3 className="serif">{t}</h3><p>{d}</p><a href="mailto:hello@dreamhousecinemas.in?subject=Production%20Enquiry" aria-label={`Enquire about ${t}`}><ArrowUpRight size={18}/></a></motion.article>)}</div></section>
   <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">02 / Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
-   <div className="dhc-rental-category">
-    <div className="dhc-rental-category-head"><div><span className="eyebrow">01 / Camera equipment</span><h3 className="serif">Camera <em>rental</em></h3></div><span className="dhc-rental-count">03 ITEMS</span></div>
-    <div className="dhc-equipment-grid dhc-equipment-list">{equipment.camera.slice(0,showAllCamera?equipment.camera.length:6).map((item,i)=><motion.article className="dhc-equipment-card dhc-rental-item" key={item.name} {...reveal}><div className="dhc-equipment-info"><span className="dhc-rental-item-no">C / 0{i+1}</span><h4>{item.name}</h4><p className="dhc-item-price">₹{item.price.toLocaleString("en-IN")} <small>rental rate</small></p><a href={`/book?type=rental&item=${encodeURIComponent(item.name)}`}>Add to enquiry <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
-    {equipment.camera.length>6&&<button className="dhc-view-more" onClick={()=>setShowAllCamera(!showAllCamera)}>{showAllCamera?"View Less":"View More"} <ArrowDown size={14}/></button>}
-  </div>
-  <div className="dhc-rental-category">
-    <div className="dhc-rental-category-head"><div><span className="eyebrow">02 / Lighting & support</span><h3 className="serif">Lights <em>& grip</em></h3></div><span className="dhc-rental-count">20 ITEMS</span></div>
-    <div className="dhc-equipment-grid dhc-equipment-list">{equipment.lights.slice(0,showAllLights?equipment.lights.length:6).map((item,i)=><motion.article className="dhc-equipment-card dhc-rental-item" key={item.name} {...reveal}><div className="dhc-equipment-info"><span className="dhc-rental-item-no">L / {String(i+1).padStart(2,"0")}</span><h4>{item.name}</h4><p className="dhc-item-price">₹{item.price.toLocaleString("en-IN")} <small>/ day</small></p><a href={`/book?type=rental&item=${encodeURIComponent(item.name)}`}>Add to enquiry <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
-    <button className="dhc-view-more" onClick={()=>setShowAllLights(!showAllLights)}>{showAllLights?"View Less":"View More"} <ArrowDown size={14}/></button>
-  </div>
+   <div className="dhc-equipment-grid">{categories.map((c,i)=><motion.article className="dhc-equipment-card" key={c.n} {...reveal}><div className="dhc-equipment-image"><img src={c.image} alt={c.title} loading="lazy"/><span>{c.n}</span></div><div className="dhc-equipment-info"><c.icon size={18}/><h3>{c.title}</h3><p>{c.detail}</p><a href={`mailto:hello@dreamhousecinemas.in?subject=${encodeURIComponent(c.title+" rental enquiry")}`}>Enquire about rental <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
    <div className="dhc-rental-note"><span>NEED A COMPLETE CAMERA PACKAGE?</span><Enquiry label="Request a rental quote"/></div>
   </div></section>
   <section className="dhc-reel"><FilmVideo src={V.lens}/><div className="dhc-reel-shade"/><div className="dhc-reel-caption"><span className="eyebrow">Built around the craft</span><p className="serif">Every setup<br/>starts with <em>the details.</em></p></div></section>
@@ -143,47 +111,7 @@ export function WorksPage(){
 }
 export function BookPage(){
  const [kind,setKind]=useState("production");
- const [selected,setSelected]=useState<string[]>([]);
- useEffect(()=>{const params=new URLSearchParams(window.location.search);if(params.get("type")==="rental")setKind("rental");const item=params.get("item");if(item)setSelected([item]);},[]);
- const allEquipment=[...equipment.camera,...equipment.lights];
- const toggleItem=(name:string)=>setSelected(current=>current.includes(name)?current.filter(x=>x!==name):[...current,name]);
- const selectedTotal=selected.reduce((sum,name)=>sum+(allEquipment.find(x=>x.name===name)?.price||0),0);
- return <main className="site-shell dhc-site"><Header/>
-  <section className="source-form-wrap dhc-booking-page">
-   <div className="source-form-backdrop"><FilmVideo src={V.setup}/><span/></div>
-   <div className="eyebrow">— Plan your next shoot —</div>
-   <h1 className="serif">Let’s make your <em>production happen.</em></h1>
-   <p>Tell us what you’re planning. Our team will get back to you with the next steps.</p>
-   <div className="source-tabs"><button className={kind==="production"?"active":""} onClick={()=>setKind("production")}>🎬 Production Enquiry</button><button className={kind==="rental"?"active":""} onClick={()=>setKind("rental")}>📷 Equipment Rental</button></div>
-   <form action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain" className="source-form dhc-booking-form">
-    <input name="Enquiry type" type="hidden" value={kind}/>
-    <h2>YOUR CONTACT DETAILS</h2>
-    <input name="Full name" placeholder="Full name *" required/>
-    <input name="Phone / WhatsApp" type="tel" placeholder="Phone / WhatsApp *" required/>
-    <input name="Email" type="email" placeholder="Email address *" required/>
-    <input name="Company" placeholder="Company / Production house (optional)"/>
-    <h2>SHOOT DETAILS</h2>
-    <input name="Project / shoot type" placeholder="Project / shoot type *" required/>
-    <input name="Shoot location" placeholder="Shoot location *" required/>
-    <label className="dhc-form-field"><span>Expected shoot date</span><input name="Shoot date" type="date"/></label>
-    <label className="dhc-form-field"><span>Number of rental days</span><input name="Rental days" type="number" min="1" placeholder="e.g. 1"/></label>
-    {kind==="rental"&&<>
-      <h2>SELECT EQUIPMENT</h2>
-      <p className="dhc-form-hint">Select the camera and lighting equipment you need. Listed rates are indicative; final availability and quote will be confirmed by our team.</p>
-      <div className="dhc-booking-equipment">
-       <div><h3>Camera</h3>{equipment.camera.map(item=><label className="dhc-equipment-check" key={item.name}><input type="checkbox" checked={selected.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><b>₹{item.price.toLocaleString("en-IN")}</b></label>)}</div>
-       <div><h3>Lights</h3>{equipment.lights.map(item=><label className="dhc-equipment-check" key={item.name}><input type="checkbox" checked={selected.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><b>₹{item.price.toLocaleString("en-IN")}</b></label>)}</div>
-      </div>
-      <input type="hidden" name="Selected equipment" value={selected.join(", ")}/>
-      <input type="hidden" name="Indicative equipment total" value={`₹${selectedTotal.toLocaleString("en-IN")} (subject to confirmation)`}/>
-      <div className="dhc-booking-total"><span>{selected.length} items selected · indicative total</span><strong>₹{selectedTotal.toLocaleString("en-IN")}</strong></div>
-    </>}
-    <h2>PROJECT BRIEF</h2>
-    <textarea name="Project brief" placeholder="Tell us about your project, equipment requirements, number of shoot days and any other details *" required/>
-    <button className="button-gold" type="submit">Send Enquiry <ArrowUpRight size={15}/></button>
-    <small>Listed rates are indicative. Availability, rental duration, delivery and the final quote will be confirmed by Dream House Cinemas.</small>
-   </form>
-  </section><Footer/></main>;
+ return <main className="site-shell dhc-site"><Header/><section className="source-form-wrap"><div className="eyebrow">— Let’s Create Together —</div><h1 className="serif">Tell us about <em>your project</em></h1><p>We’re here to bring your vision to life.</p><div className="source-tabs"><button className={kind==="production"?"active":""} onClick={()=>setKind("production")}>🎬 Production Enquiry</button><button className={kind==="rental"?"active":""} onClick={()=>setKind("rental")}>📷 Equipment Rental Request</button></div><form action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain" className="source-form"><input name="Enquiry type" type="hidden" value={kind}/><input name="Name" placeholder="Your Name *" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" required/><input name="Email" type="email" placeholder="Email Address *" required/><input name="Project type" placeholder="Project Type *" required/><input name="Shoot location" placeholder="Shoot Location *" required/><input name="Shoot date" type="date" aria-label="Expected Shoot Date"/><input name="Budget" placeholder="Budget Range (Optional)"/><textarea name="Brief" placeholder="Tell us about your project * (Brief about your project, script, requirements, number of shoot days, etc.)" required/><button className="button-gold" type="submit">Submit Enquiry <ArrowUpRight size={15}/></button><small>🔒 We respect your privacy. Your information is safe with us.</small></form></section><Footer/></main>;
 }
 export function ContactPage(){
  return <main className="site-shell dhc-site"><Header/><section className="source-contact wrap"><div className="source-contact-visual"><FilmVideo src={V.setup}/><span/></div><div className="eyebrow">— Get In Touch —</div><h1 className="serif">Let’s create something <em>amazing together</em></h1><p className="source-contact-intro">Have a project in mind or need equipment for your next shoot? We’re here to help.</p><div className="source-contact-grid"><form className="source-form" action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain"><h2>SEND US A MESSAGE</h2><input name="Name" placeholder="Your Name *" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" required/><input name="Email" type="email" placeholder="Email Address *" required/><input name="Enquiry Type" placeholder="Enquiry Type *" required/><input name="Project Type" placeholder="Project Type *" required/><textarea name="Message" placeholder="Tell us about your project * (Brief about your project, requirements, shoot days, etc.)" required/><button className="button-gold" type="submit">Submit Enquiry <ArrowUpRight size={15}/></button><small>🔒 We respect your privacy. Your information is safe with us.</small></form><div className="source-contact-info"><h2>CONTACT INFORMATION</h2><article><b>DREAM HOUSE CINEMAS</b><p>Kerala, India<br/>Serving Across South India</p></article><article><b>CALL / WHATSAPP</b><p>+91 999 555 1234<br/>+91 987 654 3210</p></article><article><b>EMAIL</b><p>hello@dreamhousecinemas.com<br/>info@dreamhousecinemas.com</p></article><article><b>WORKING HOURS</b><p>Mon – Sat : 9:00 AM – 7:00 PM<br/>Sunday : By Appointment</p></article><img src={SOURCE_ASSET+"contact-chair.jpg"} alt="Director's chair on set"/></div></div></section><Footer/></main>;
