@@ -335,11 +335,26 @@ test("mobile header brand name and descriptor remain readable", async ({ page })
   for (const width of [320, 360, 390, 430]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
-    const sizes = await page.locator(".dhc-nav .brand-name").evaluate((element) => ({
-      name: Number.parseFloat(getComputedStyle(element).fontSize),
-      descriptor: Number.parseFloat(getComputedStyle(element.querySelector("small")!).fontSize),
-    }));
-    expect(sizes.name, `brand name at ${width}px`).toBeGreaterThanOrEqual(12);
-    expect(sizes.descriptor, `brand descriptor at ${width}px`).toBeGreaterThanOrEqual(10);
+    const brand = page.locator(".dhc-nav .brand");
+    const menu = page.getByRole("button", { name: "Toggle navigation" });
+    const geometry = await brand.evaluate((element) => {
+      const menu = document.querySelector(".dhc-nav .mobile-menu")!;
+      const name = element.querySelector(".brand-name")!;
+      const descriptor = name.querySelector("small")!;
+      const brandRect = element.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      return {
+        nameSize: Number.parseFloat(getComputedStyle(name).fontSize),
+        descriptorSize: Number.parseFloat(getComputedStyle(descriptor).fontSize),
+        brandRight: brandRect.right,
+        menuLeft: menuRect.left,
+        menuWidth: menuRect.width,
+      };
+    });
+    expect(geometry.nameSize, `brand name at ${width}px`).toBeGreaterThanOrEqual(12);
+    expect(geometry.descriptorSize, `brand descriptor at ${width}px`).toBeGreaterThanOrEqual(10);
+    expect(geometry.menuWidth).toBeLessThanOrEqual(56);
+    expect(geometry.brandRight, `brand/menu collision at ${width}px`).toBeLessThanOrEqual(geometry.menuLeft - 6);
+    await expect(menu).toBeVisible();
   }
 });
