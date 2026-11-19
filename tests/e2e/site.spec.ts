@@ -175,3 +175,19 @@ test("key routes remain usable in landscape orientation", async ({ page }) => {
     }
   }
 });
+
+
+test("all primary interface text uses the single Playfair Display family", async ({ page }) => {
+  await page.goto("/");
+  const homeFamilies = await page.locator("body, .dhc-nav a, .dhc-hero h1, .dhc-hero p, .button-gold, footer")
+    .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).fontFamily));
+  for (const family of homeFamilies) {
+    expect(family).toBe('"Playfair Display"');
+  }
+  await page.goto("/book");
+  const formFamilies = await page.locator("input, textarea, select, button, label")
+    .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).fontFamily));
+  for (const family of formFamilies) {
+    expect(family).toBe('"Playfair Display"');
+  }
+});
