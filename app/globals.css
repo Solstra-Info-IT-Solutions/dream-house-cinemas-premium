@@ -1239,6 +1239,7 @@ html, body, button, input, textarea, select, option {
   font-size: .86rem !important;
 }
 .dhc-site .dhc-booking-picker input[type="checkbox"] {
+  grid-column: 1 !important;
   width: 16px !important;
   height: 16px !important;
   min-width: 16px !important;
