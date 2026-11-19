@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // ESLint is run as an explicit CI stage using the flat config.
   eslint: { ignoreDuringBuilds: true },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "photoshop-api.adobe.io" },
+      { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "raw.githubusercontent.com" },
+    ],
+  },
   async headers() {
     return [
       {
