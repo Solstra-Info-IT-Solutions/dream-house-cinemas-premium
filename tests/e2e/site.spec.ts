@@ -282,8 +282,8 @@ test("desktop primary navigation links target the correct routes", async ({ page
   for (const [label, href] of [
     ["About", "/about"],
     ["Production", "/production"],
-    ["Rental", "/rental"],
-    ["Works", "/works"],
+    ["Equipment", "/rental"],
+    ["Our Work", "/works"],
     ["Contact", "/contact"],
     ["Book Now", "/book"],
   ]) {
