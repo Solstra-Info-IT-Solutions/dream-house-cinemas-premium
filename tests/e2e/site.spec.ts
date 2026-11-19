@@ -87,6 +87,8 @@ test("booking form exposes accessible names and validates required fields", asyn
   expect(await form.evaluate((element) => (element as HTMLFormElement).checkValidity())).toBe(false);
   await page.getByLabel("Your name").fill("QA Visitor");
   await page.getByLabel("Phone or WhatsApp number").fill("+919876543210");
+  await page.getByLabel("Email address").fill("not-an-email");
+  expect(await form.evaluate((element) => (element as HTMLFormElement).checkValidity())).toBe(false);
   await page.getByLabel("Email address").fill("qa@example.com");
   await page.getByLabel("Project type").fill("Commercial film");
   await page.getByLabel("Shoot location").fill("Kochi");
@@ -100,6 +102,8 @@ test("contact form exposes accessible names and validates required fields", asyn
   expect(await form.evaluate((element) => (element as HTMLFormElement).checkValidity())).toBe(false);
   await page.getByLabel("Your name").fill("QA Visitor");
   await page.getByLabel("Phone or WhatsApp number").fill("+919876543210");
+  await page.getByLabel("Email address").fill("not-an-email");
+  expect(await form.evaluate((element) => (element as HTMLFormElement).checkValidity())).toBe(false);
   await page.getByLabel("Email address").fill("qa@example.com");
   await page.getByLabel("Enquiry type").fill("Production");
   await page.getByLabel("Project type").fill("Commercial film");
@@ -160,4 +164,30 @@ test("the declared typography uses Playfair Display only", async ({ page }) => {
       expect(family).not.toMatch(/Georgia|serif|sans-serif|Arial/i);
     }
   }
+});
+
+test("equipment catalogue expands and collapses the complete lighting list", async ({ page }) => {
+  await page.goto("/rental");
+  const groups = page.locator(".dhc-catalogue-category");
+  await expect(groups).toHaveCount(2);
+  await expect(groups.nth(0).locator(".dhc-catalogue-card")).toHaveCount(3);
+  const lights = groups.nth(1);
+  await expect(lights.locator(".dhc-catalogue-card")).toHaveCount(6);
+  await lights.getByRole("button", { name: "View more" }).click();
+  await expect(lights.locator(".dhc-catalogue-card")).toHaveCount(20);
+  await lights.getByRole("button", { name: "View less" }).click();
+  await expect(lights.locator(".dhc-catalogue-card")).toHaveCount(6);
+});
+
+test("work portfolio filters show the expected project categories", async ({ page }) => {
+  await page.goto("/works");
+  const cards = page.locator(".source-work-grid article");
+  await expect(cards).toHaveCount(9);
+  const expected = [["AD FILMS", 2], ["DOCUMENTARIES", 2], ["CORPORATE FILMS", 2], ["BRAND FILMS", 1], ["PROMOTIONAL", 2]] as const;
+  for (const [label, count] of expected) {
+    await page.getByRole("button", { name: label }).click();
+    await expect(cards).toHaveCount(count);
+  }
+  await page.getByRole("button", { name: "ALL" }).click();
+  await expect(cards).toHaveCount(9);
 });
