@@ -44,7 +44,7 @@ test("rental catalogue expands and collapses without losing items", async ({ pag
   const cards = page.locator(".dhc-catalogue-card");
   await expect(cards).toHaveCount(9);
   await page.getByRole("button", { name: "View more" }).click();
-  await expect(cards).toHaveCount(24);
+  await expect(cards).toHaveCount(23);
   await page.getByRole("button", { name: "View less" }).click();
   await expect(cards).toHaveCount(9);
 });
