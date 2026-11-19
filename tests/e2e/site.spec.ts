@@ -6,7 +6,7 @@ const widths = [320, 360, 375, 390, 414, 430, 480, 768, 820, 1024, 1280, 1366, 1
 
 test.describe("route smoke and responsive overflow", () => {
   for (const route of routes) {
-    test(`${route} renders without horizontal page overflow at every target width`, async ({ page }) => {
+    test(`${route} renders without horizontal page overflow at every target width`, async ({ page }, testInfo) => {
       for (const width of widths) {
         await page.setViewportSize({ width, height: 900 });
         const response = await page.goto(route, { waitUntil: "domcontentloaded" });
@@ -21,6 +21,23 @@ test.describe("route smoke and responsive overflow", () => {
           Math.max(dimensions.document, dimensions.body),
           `horizontal overflow on ${route} at ${width}px: ${JSON.stringify(dimensions)}`,
         ).toBeLessThanOrEqual(dimensions.viewport + 2);
+        if (width === 390 || width === 1440) {
+          await page.evaluate(async () => {
+            const step = Math.max(280, window.innerHeight * 0.75);
+            for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+              window.scrollTo(0, y);
+              await new Promise((resolve) => setTimeout(resolve, 45));
+            }
+            window.scrollTo(0, 0);
+          });
+          await page.waitForTimeout(750);
+          const routeName = route === "/" ? "home" : route.slice(1);
+          await page.screenshot({
+            path: testInfo.outputPath(`${routeName}-${width}.png`),
+            fullPage: true,
+            animations: "disabled",
+          });
+        }
       }
     });
   }
