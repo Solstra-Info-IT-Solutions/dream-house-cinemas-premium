@@ -87,7 +87,7 @@ test("booking query preselects equipment and estimate updates from checkbox sele
   await expect(page.locator(".dhc-booking-estimate strong")).toHaveText("₹2,000");
 });
 
-test("booking checkboxes render at the intended compact size", async ({ page }) => {
+test("booking checkboxes render at the intended compact size", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/book?type=rental");
   const checkbox = page.locator('.dhc-booking-picker input[type="checkbox"]').first();
@@ -97,6 +97,11 @@ test("booking checkboxes render at the intended compact size", async ({ page }) 
   });
   expect(size.width).toBe(16);
   expect(size.height).toBe(16);
+  await page.screenshot({
+    path: testInfo.outputPath("booking-rental-picker-390.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
 });
 
 test("booking tabs expose their selected state accessibly", async ({ page }) => {
