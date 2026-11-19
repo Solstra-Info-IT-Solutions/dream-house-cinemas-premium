@@ -179,6 +179,11 @@ test("key routes remain usable in landscape orientation", async ({ page }) => {
 
 test("all primary interface text uses the single Playfair Display family", async ({ page }) => {
   await page.goto("/");
+  const fontLoaded = await page.evaluate(async () => {
+    await document.fonts.ready;
+    return document.fonts.check('16px "Playfair Display"');
+  });
+  expect(fontLoaded).toBe(true);
   const homeFamilies = await page.locator("body, .dhc-nav a, .dhc-hero h1, .dhc-hero p, .button-gold, footer")
     .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).fontFamily));
   for (const family of homeFamilies) {
