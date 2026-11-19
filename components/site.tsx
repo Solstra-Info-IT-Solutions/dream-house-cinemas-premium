@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Aperture, ArrowDown, Camera, Clapperboard, Focus, Lightbulb, Menu, Monitor, Move3D, Radio, Video as VideoIcon, X } from "lucide-react";
+import { Aperture, ArrowDown, Camera, Clapperboard, Menu, Video as VideoIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -105,7 +105,7 @@ function EquipmentCatalogue({compact=false}:{compact?:boolean}){
    const visible=expanded[group.title]?group.items:group.items.slice(0,6);
    return <section className="dhc-catalogue-category" key={group.title}>
     <div className="dhc-catalogue-heading"><div><span className="eyebrow">Equipment category</span><h3>{group.title}</h3></div><span className="dhc-catalogue-count">{group.items.length} items</span></div>
-    <div className="dhc-catalogue-grid">{visible.map((item,index)=><article className="dhc-catalogue-card" key={item.name}><h4>{item.name}</h4><div className="dhc-catalogue-card-bottom"><strong>{money(item.price)}</strong><Link href={"/book?type=rental&item="+encodeURIComponent(item.name)}>Add to enquiry</Link></div></article>)}</div>
+    <div className="dhc-catalogue-grid">{visible.map((item)=><article className="dhc-catalogue-card" key={item.name}><h4>{item.name}</h4><div className="dhc-catalogue-card-bottom"><strong>{money(item.price)}</strong><Link href={"/book?type=rental&item="+encodeURIComponent(item.name)}>Add to enquiry</Link></div></article>)}</div>
     {group.items.length>6&&<button className="dhc-catalogue-toggle" type="button" aria-expanded={!!expanded[group.title]} onClick={()=>setExpanded(v=>({...v,[group.title]:!v[group.title]}))}>{expanded[group.title]?"View less":"View more"}</button>}
    </section>;
   })}
@@ -128,7 +128,7 @@ const workItems=[
 ];
 export function WorksPage(){
  const [filter,setFilter]=useState("all");
- return <main className="site-shell dhc-site"><Header/><section className="wrap source-works"><div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the kinds of stories and visual projects Dream House Cinemas creates.</p></div><div className="source-filter">{[["all","ALL"],["ad","AD FILMS"],["doc","DOCUMENTARIES"],["corp","CORPORATE FILMS"],["brand","BRAND FILMS"],["promo","PROMOTIONAL"]].map(([v,t])=><button key={v} onClick={()=>setFilter(v)} className={filter===v?"active":""}>{t}</button>)}</div><div className="source-work-grid">{workItems.filter(([cat])=>filter==="all"||filter===cat).map(([cat,label,img],i)=><article key={img}><img src={SOURCE_ASSET+img} alt={label} loading="lazy"/><div className="source-work-overlay"><span>{label}</span></div><i aria-hidden="true"></i></article>)}</div><p className="source-disclaimer">Project imagery shown as portfolio category previews. Actual project films can be added when the client’s final reel links are supplied.</p></section><Footer/></main>;
+ return <main className="site-shell dhc-site"><Header/><section className="wrap source-works"><div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the kinds of stories and visual projects Dream House Cinemas creates.</p></div><div className="source-filter">{[["all","ALL"],["ad","AD FILMS"],["doc","DOCUMENTARIES"],["corp","CORPORATE FILMS"],["brand","BRAND FILMS"],["promo","PROMOTIONAL"]].map(([v,t])=><button key={v} onClick={()=>setFilter(v)} className={filter===v?"active":""}>{t}</button>)}</div><div className="source-work-grid">{workItems.filter(([cat])=>filter==="all"||filter===cat).map(([cat,label,img])=><article key={img}><img src={SOURCE_ASSET+img} alt={label} loading="lazy"/><div className="source-work-overlay"><span>{label}</span></div><i aria-hidden="true"></i></article>)}</div><p className="source-disclaimer">Project imagery shown as portfolio category previews. Actual project films can be added when the client’s final reel links are supplied.</p></section><Footer/></main>;
 }
 export function BookPage(){
  const [kind,setKind]=useState("production");
