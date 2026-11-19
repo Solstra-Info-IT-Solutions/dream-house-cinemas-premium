@@ -247,3 +247,126 @@ button, input, textarea, select, option {
 
 /* Keep vertical scroll content outside the shell's horizontal clipping boundary. */
 .dhc-site.site-shell { overflow-x: clip; overflow-y: visible; }
+
+
+/* CLIENT BUGFIX — isolate the hero media from the next section during scroll */
+.dhc-site .dhc-hero {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+}
+.dhc-site .dhc-hero-media {
+  inset: -3% 0;
+  overflow: hidden;
+  contain: paint;
+}
+.dhc-site .dhc-intro {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background: #080808;
+  min-width: 0;
+}
+.dhc-site .dhc-intro-head,
+.dhc-site .dhc-intro-copy {
+  min-width: 0;
+}
+.dhc-site .dhc-intro .eyebrow {
+  display: block;
+  max-width: 100%;
+  line-height: 1.7;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Keep the supplied logo fully inside its own visible box in header and footer. */
+.dhc-site .brand {
+  min-width: 0;
+  flex-shrink: 1;
+  align-items: center;
+  gap: 14px;
+}
+.dhc-site .brand-mark.dhc-logo-wrap,
+.dhc-site .footer .brand-mark.dhc-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  padding: 5px;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+}
+.dhc-site .dhc-logo-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 0;
+  margin: 0;
+  transform: none;
+  clip-path: none;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+.dhc-site .brand-name {
+  min-width: 0;
+  overflow: visible;
+  white-space: normal;
+}
+
+/* Keep the home-page kicker inside the cinematic corner-frame composition. */
+.dhc-site .dhc-hero-content {
+  width: min(1320px, calc(100% - 64px));
+  min-width: 0;
+}
+.dhc-site .dhc-hero-content > .eyebrow {
+  display: block;
+  width: fit-content;
+  max-width: min(100%, 590px);
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.65;
+  padding: 2px 10px 4px 0;
+}
+@media (max-width: 900px) {
+  .dhc-site .brand-mark.dhc-logo-wrap,
+  .dhc-site .footer .brand-mark.dhc-logo-wrap {
+    flex-basis: 62px;
+    width: 62px;
+    height: 62px;
+    min-width: 62px;
+  }
+  .dhc-site .dhc-hero-content {
+    width: calc(100% - 48px);
+  }
+  .dhc-site .dhc-hero-content > .eyebrow {
+    max-width: min(100%, 500px);
+  }
+}
+@media (max-width: 560px) {
+  .dhc-site .brand-mark.dhc-logo-wrap,
+  .dhc-site .footer .brand-mark.dhc-logo-wrap {
+    flex-basis: 54px;
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    padding: 3px;
+  }
+  .dhc-site .brand { gap: 8px; }
+  .dhc-site .dhc-hero-content {
+    width: calc(100% - 40px);
+  }
+  .dhc-site .dhc-hero-content > .eyebrow {
+    max-width: 100%;
+    font-size: 10px;
+    line-height: 1.55;
+  }
+}
