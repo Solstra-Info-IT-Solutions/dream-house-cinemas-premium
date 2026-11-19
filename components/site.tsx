@@ -2,7 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Aperture, ArrowDown, ArrowUpRight, Camera, Clapperboard, Focus, Lightbulb, Menu, Monitor, Move3D, Radio, Video as VideoIcon, X } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const V = {
   hero: "https://videos.pexels.com/video-files/36604690/15520309_1920_1080_25fps.mp4",
@@ -40,7 +40,7 @@ function FilmVideo({src,className="",poster}:{src:string;className?:string;poste
 function Header(){
   const [open,setOpen]=useState(false);
   return <header className="nav dhc-nav"><Link href="/" className="brand"><span className="brand-mark dhc-logo-wrap"><img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:2f741f08-9e62-42c4-a7c8-d7a31de7d16a" alt="Dream House Cinemas logo" /></span><span className="brand-name">DREAM HOUSE CINEMAS<small>FILM PRODUCTION · EQUIPMENT RENTAL</small></span></Link>
-    <nav className="nav-links"><Link href="/">Home</Link><Link href="/about">About Us</Link><Link href="/production">Production</Link><Link href="/rental">Rental Equipment</Link><Link href="/works">Our Works</Link><Link href="/book">Book Now</Link><Link href="/contact">Contact</Link><a className="nav-cta" href="/book">Enquire <ArrowUpRight size={14}/></a></nav>
+    <nav className="nav-links"><Link href="/">Home</Link><Link href="/about">About</Link><Link href="/production">Production</Link><Link href="/rental">Equipment</Link><Link href="/works">Our Work</Link><Link href="/contact">Contact</Link><Link className="nav-cta" href="/book">Book Now <ArrowUpRight size={14}/></Link></nav>
     <button className="nav-cta mobile-menu" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?<X size={18}/>:<Menu size={18}/>}</button>
     {open&&<nav className="mobile-panel"><Link onClick={()=>setOpen(false)} href="/">Home</Link><Link onClick={()=>setOpen(false)} href="/about">About Us</Link><Link onClick={()=>setOpen(false)} href="/production">Production</Link><Link onClick={()=>setOpen(false)} href="/rental">Rental Equipment</Link><Link onClick={()=>setOpen(false)} href="/works">Our Works</Link><Link onClick={()=>setOpen(false)} href="/book">Book Now</Link><Link onClick={()=>setOpen(false)} href="/contact">Contact</Link></nav>}
   </header>;
@@ -68,7 +68,7 @@ export function HomePage(){
   <section className="dhc-production-band"><FilmVideo src={V.setup}/><div className="dhc-band-shade"/><div className="dhc-band-copy"><span className="eyebrow">01 / Production services</span><p className="serif">Make every<br/><em>frame count.</em></p><span>PRE-PRODUCTION · PRODUCTION · POST</span></div></section>
   <section className="dhc-services wrap"><div className="section-head"><div><span className="eyebrow">Production capabilities</span><h2 className="serif">From brief to<br/><em>final frame.</em></h2></div><span className="eyebrow">01 — Production</span></div><div className="dhc-service-grid">{services.map(([n,t,d])=><motion.article className="dhc-service" key={n} {...reveal}><span>{n} / 04</span><h3 className="serif">{t}</h3><p>{d}</p><a href="mailto:hello@dreamhousecinemas.in?subject=Production%20Enquiry" aria-label={`Enquire about ${t}`}><ArrowUpRight size={18}/></a></motion.article>)}</div></section>
   <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">02 / Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
-   <div className="dhc-equipment-grid">{categories.map((c,i)=><motion.article className="dhc-equipment-card" key={c.n} {...reveal}><div className="dhc-equipment-image"><img src={c.image} alt={c.title} loading="lazy"/><span>{c.n}</span></div><div className="dhc-equipment-info"><c.icon size={18}/><h3>{c.title}</h3><p>{c.detail}</p><a href={`mailto:hello@dreamhousecinemas.in?subject=${encodeURIComponent(c.title+" rental enquiry")}`}>Enquire about rental <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
+   <EquipmentCatalogue compact/>
    <div className="dhc-rental-note"><span>NEED A COMPLETE CAMERA PACKAGE?</span><Enquiry label="Request a rental quote"/></div>
   </div></section>
   <section className="dhc-reel"><FilmVideo src={V.lens}/><div className="dhc-reel-shade"/><div className="dhc-reel-caption"><span className="eyebrow">Built around the craft</span><p className="serif">Every setup<br/>starts with <em>the details.</em></p></div></section>
@@ -87,10 +87,52 @@ const sourceServices = [
   ["06","DIGITAL & SOCIAL MEDIA","Video content designed for digital and social platforms."],
   ["07","PRODUCTION SUPPORT","Production assistance and support for shoots of every scale."],
 ];
-const rentalTypes = [
-  ["01","CAMERAS","📷"],["02","LENSES","◉"],["03","LIGHTING","💡"],
-  ["04","CAMERA SUPPORT","▤"],["05","ACCESSORIES","⚙"],["06","OTHER EQUIPMENT","▣"],
+
+type EquipmentItem = { name: string; price: number };
+const equipmentGroups: { title: string; items: EquipmentItem[] }[] = [
+ { title: "Camera", items: [
+  {name:"S1H camera body",price:2000},
+  {name:"Sigma 24-70 lens",price:800},
+  {name:"Zhiyun Crane 3S gimbal",price:1000},
+ ]},
+ { title: "Lights", items: [
+  {name:"Nanlight 500",price:600},
+  {name:"300",price:400},
+  {name:"Other LED light",price:400},
+  {name:"RGB tube (one tube)",price:500},
+  {name:"Aperture 1200",price:1500},
+  {name:"Baby 1000",price:250},
+  {name:"Baby 800",price:250},
+  {name:"Baby 350",price:200},
+  {name:"Baby 150",price:150},
+  {name:"One KV",price:150},
+  {name:"Two KV",price:200},
+  {name:"Cool light",price:300},
+  {name:"C stand",price:150},
+  {name:"Jumbo stand",price:250},
+  {name:"All frames",price:500},
+  {name:"White clothes",price:100},
+  {name:"Black clothes",price:100},
+  {name:"Skimmer 12×12",price:200},
+  {name:"Generator",price:800},
+  {name:"Track and trolley",price:400},
+ ]}
 ];
+const money = (amount:number) => "₹"+amount.toLocaleString("en-IN");
+function EquipmentCatalogue({compact=false}:{compact?:boolean}){
+ const [expanded,setExpanded]=useState<Record<string,boolean>>({});
+ return <div className={compact?"dhc-catalogue dhc-catalogue-compact":"dhc-catalogue"}>
+  {equipmentGroups.map(group=>{
+   const visible=expanded[group.title]?group.items:group.items.slice(0,6);
+   return <section className="dhc-catalogue-category" key={group.title}>
+    <div className="dhc-catalogue-heading"><div><span className="eyebrow">Equipment category</span><h3>{group.title}</h3></div><span className="dhc-catalogue-count">{group.items.length} items</span></div>
+    <div className="dhc-catalogue-grid">{visible.map((item,index)=><article className="dhc-catalogue-card" key={item.name}><span className="dhc-catalogue-index">{String(index+1).padStart(2,"0")}</span><h4>{item.name}</h4><div className="dhc-catalogue-card-bottom"><strong>{money(item.price)}</strong><Link href={"/book?type=rental&item="+encodeURIComponent(item.name)}>Add to enquiry <ArrowUpRight size={13}/></Link></div></article>)}</div>
+    {group.items.length>6&&<button className="dhc-catalogue-toggle" type="button" aria-expanded={!!expanded[group.title]} onClick={()=>setExpanded(v=>({...v,[group.title]:!v[group.title]}))}>{expanded[group.title]?"View less":"View more"} <ArrowUpRight size={14}/></button>}
+   </section>;
+  })}
+ </div>;
+}
+
 function SourcePageHero({eyebrow,title,accent,copy,image}:{eyebrow?:string;title:string;accent?:string;copy:string;image:string}){
  return <section className="source-page-hero wrap"><div className="source-page-hero-copy"><span className="eyebrow">{eyebrow||"Dream House Cinemas"}</span><h1 className="serif">{title} {accent&&<em>{accent}</em>}</h1><p>{copy}</p><div className="source-hero-actions"><Link className="button-gold" href="/book">Discuss your requirements <ArrowUpRight size={15}/></Link><Link className="button-line" href="/contact">Talk to our team <ArrowUpRight size={15}/></Link></div></div><div className="source-page-visual"><FilmVideo src={title==="Equipment"?V.lens:V.setup} poster={SOURCE_ASSET+image}/><img src={SOURCE_ASSET+image} alt={title}/><span className="source-visual-caption">DREAM HOUSE CINEMAS · {title.toUpperCase()}</span></div></section>;
 }
@@ -100,7 +142,7 @@ export function ProductionPage(){
 }
 export function RentalPage(){
  return <main className="site-shell dhc-site"><Header/><SourcePageHero title="Equipment" accent="Rental" copy="Professional Gear. For Every Vision. High quality camera, lighting and grip equipment for films, commercials, documentaries, corporate videos and digital content. Reliable gear. Expert support. On time, every time." image="rental-flatlay.jpg"/>
- <section className="wrap source-content"><div className="eyebrow">— What We Rent —</div><div className="source-rental-grid">{rentalTypes.map(([n,t,ic])=><Link href="/book?type=rental" key={n}><span className="source-rental-icon">{ic}</span><span className="source-rental-title">VIEW {t}</span><span className="source-rental-number">{n}</span><ArrowUpRight size={17}/></Link>)}</div><div className="source-trust-strip"><span>🚚 Flexible Rental Periods</span><span>♡ Well Maintained Gear</span><span>🕒 Timely Delivery</span><span>🎧 Expert Support</span><span>✓ Trusted by Professionals</span></div><div className="source-bottom-cta"><p>Need equipment for your next shoot?</p><Link className="button-gold" href="/book?type=rental">Check availability <ArrowUpRight size={15}/></Link></div></section><Footer/></main>;
+ <section className="wrap source-content"><div className="eyebrow">— What We Rent —</div><EquipmentCatalogue/><div className="source-trust-strip"><span>🚚 Flexible Rental Periods</span><span>♡ Well Maintained Gear</span><span>🕒 Timely Delivery</span><span>🎧 Expert Support</span><span>✓ Trusted by Professionals</span></div><div className="source-bottom-cta"><p>Need equipment for your next shoot?</p><Link className="button-gold" href="/book?type=rental">Check availability <ArrowUpRight size={15}/></Link></div></section><Footer/></main>;
 }
 const workItems=[
  ["ad","AD FILM","work-adfilm.jpg"],["doc","DOCUMENTARY","work-documentary.jpg"],["corp","CORPORATE FILM","work-corporate.jpg"],["brand","BRAND FILM","work-brand.jpg"],["promo","PROMOTIONAL VIDEO","work-promo.jpg"],["ad","JEWELLERY AD","work-jewellery.jpg"],["corp","INDUSTRIAL FILM","work-industrial.jpg"],["doc","HEALTHCARE FILM","work-healthcare.jpg"],["promo","EVENT FILM","work-event.jpg"]
@@ -111,7 +153,11 @@ export function WorksPage(){
 }
 export function BookPage(){
  const [kind,setKind]=useState("production");
- return <main className="site-shell dhc-site"><Header/><section className="source-form-wrap"><div className="eyebrow">— Let’s Create Together —</div><h1 className="serif">Tell us about <em>your project</em></h1><p>We’re here to bring your vision to life.</p><div className="source-tabs"><button className={kind==="production"?"active":""} onClick={()=>setKind("production")}>🎬 Production Enquiry</button><button className={kind==="rental"?"active":""} onClick={()=>setKind("rental")}>📷 Equipment Rental Request</button></div><form action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain" className="source-form"><input name="Enquiry type" type="hidden" value={kind}/><input name="Name" placeholder="Your Name *" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" required/><input name="Email" type="email" placeholder="Email Address *" required/><input name="Project type" placeholder="Project Type *" required/><input name="Shoot location" placeholder="Shoot Location *" required/><input name="Shoot date" type="date" aria-label="Expected Shoot Date"/><input name="Budget" placeholder="Budget Range (Optional)"/><textarea name="Brief" placeholder="Tell us about your project * (Brief about your project, script, requirements, number of shoot days, etc.)" required/><button className="button-gold" type="submit">Submit Enquiry <ArrowUpRight size={15}/></button><small>🔒 We respect your privacy. Your information is safe with us.</small></form></section><Footer/></main>;
+ const [selectedItems,setSelectedItems]=useState<string[]>([]);
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);if(params.get("type")==="rental")setKind("rental");const item=params.get("item");if(item)setSelectedItems([item]);},[]);
+ const toggleItem=(name:string)=>setSelectedItems(items=>items.includes(name)?items.filter(item=>item!==name):[...items,name]);
+ const estimate=equipmentGroups.flatMap(group=>group.items).filter(item=>selectedItems.includes(item.name)).reduce((sum,item)=>sum+item.price,0);
+ return <main className="site-shell dhc-site"><Header/><section className="source-form-wrap"><div className="eyebrow">— Let’s Create Together —</div><h1 className="serif">Tell us about <em>your project</em></h1><p>We’re here to bring your vision to life.</p><div className="source-tabs"><button className={kind==="production"?"active":""} onClick={()=>setKind("production")}>Production Enquiry</button><button className={kind==="rental"?"active":""} onClick={()=>setKind("rental")}>Equipment Rental Request</button></div><form action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain" className="source-form"><input name="Enquiry type" type="hidden" value={kind}/><input name="Selected equipment" type="hidden" value={selectedItems.join(", ")}/><input name="Indicative equipment total" type="hidden" value={money(estimate)}/><input name="Name" placeholder="Your Name *" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" required/><input name="Email" type="email" placeholder="Email Address *" required/><input name="Project type" placeholder="Project Type *" required/><input name="Shoot location" placeholder="Shoot Location *" required/><input name="Shoot date" type="date" aria-label="Expected Shoot Date"/><input name="Budget" placeholder="Budget Range (Optional)"/>{kind==="rental"&&<div className="dhc-booking-picker"><h2>Select equipment</h2><p>Select the items you want to enquire about. Final availability and quotation will be confirmed by our team.</p>{equipmentGroups.map(group=><fieldset key={group.title}><legend>{group.title}</legend>{group.items.map(item=><label key={item.name}><input type="checkbox" checked={selectedItems.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><strong>{money(item.price)}</strong></label>)}</fieldset>)}<div className="dhc-booking-estimate"><span>{selectedItems.length} item(s) selected · indicative total</span><strong>{money(estimate)}</strong></div></div>}<textarea name="Brief" placeholder="Tell us about your project * (Brief about your project, script, requirements, number of shoot days, etc.)" required/><button className="button-gold" type="submit">Submit Enquiry <ArrowUpRight size={15}/></button><small>Listed prices are indicative; availability, rental duration and final quotation will be confirmed by Dream House Cinemas.</small></form></section><Footer/></main>;
 }
 export function ContactPage(){
  return <main className="site-shell dhc-site"><Header/><section className="source-contact wrap"><div className="source-contact-visual"><FilmVideo src={V.setup}/><span/></div><div className="eyebrow">— Get In Touch —</div><h1 className="serif">Let’s create something <em>amazing together</em></h1><p className="source-contact-intro">Have a project in mind or need equipment for your next shoot? We’re here to help.</p><div className="source-contact-grid"><form className="source-form" action="mailto:hello@dreamhousecinemas.com" method="post" encType="text/plain"><h2>SEND US A MESSAGE</h2><input name="Name" placeholder="Your Name *" required/><input name="Phone" type="tel" placeholder="Phone / WhatsApp *" required/><input name="Email" type="email" placeholder="Email Address *" required/><input name="Enquiry Type" placeholder="Enquiry Type *" required/><input name="Project Type" placeholder="Project Type *" required/><textarea name="Message" placeholder="Tell us about your project * (Brief about your project, requirements, shoot days, etc.)" required/><button className="button-gold" type="submit">Submit Enquiry <ArrowUpRight size={15}/></button><small>🔒 We respect your privacy. Your information is safe with us.</small></form><div className="source-contact-info"><h2>CONTACT INFORMATION</h2><article><b>DREAM HOUSE CINEMAS</b><p>Kerala, India<br/>Serving Across South India</p></article><article><b>CALL / WHATSAPP</b><p>+91 999 555 1234<br/>+91 987 654 3210</p></article><article><b>EMAIL</b><p>hello@dreamhousecinemas.com<br/>info@dreamhousecinemas.com</p></article><article><b>WORKING HOURS</b><p>Mon – Sat : 9:00 AM – 7:00 PM<br/>Sunday : By Appointment</p></article><img src={SOURCE_ASSET+"contact-chair.jpg"} alt="Director's chair on set"/></div></div></section><Footer/></main>;
