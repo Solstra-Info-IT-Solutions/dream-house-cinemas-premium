@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./readability.css";
 
 export const metadata: Metadata = {
   title: "Dream House Cinemas | Film Production & Equipment Rental",
