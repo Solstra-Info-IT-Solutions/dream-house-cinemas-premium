@@ -114,12 +114,9 @@ for (const route of ["/", "/book", "/contact"]) {
   test(`${route} has no serious or critical automated accessibility violations`, async ({ page }) => {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();
-    const serious = results.violations.filter((violation) =>
-      violation.impact === "serious" || violation.impact === "critical"
-    );
-    expect(serious, JSON.stringify(serious, null, 2)).toEqual([]);
+    expect(results.violations, JSON.stringify(results.violations, null, 2)).toEqual([]);
   });
 }
 
