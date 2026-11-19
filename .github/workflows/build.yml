@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - name: Dependency security audit\n        run: npm audit || true\n      - run: npm run lint
+      - name: Dependency security audit
+        run: npm audit || true
+      - run: npm run lint
       - run: npx tsc --noEmit
       - run: npm run build
       - run: npx playwright install --with-deps chromium
