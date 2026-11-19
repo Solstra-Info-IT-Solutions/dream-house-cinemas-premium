@@ -368,3 +368,14 @@ test("all public routes are free of visible placeholder copy and placeholder alt
     await expect(placeholderAlt).toHaveCount(0);
   }
 });
+
+
+test("contact page production still loads instead of a placeholder block", async ({ page }) => {
+  await page.goto("/contact");
+  const image = page.getByAltText("Film production crew working on set");
+  await image.scrollIntoViewIfNeeded();
+  await expect.poll(
+    () => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0),
+    { message: "contact production image should load", timeout: 15_000 },
+  ).toBe(true);
+});
