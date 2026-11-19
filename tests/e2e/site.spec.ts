@@ -243,3 +243,33 @@ test("cinematic homepage hero video loads metadata and is configured for muted i
     { message: "hero video should load metadata and a video frame", timeout: 20_000 },
   ).toBe(true);
 });
+
+
+test("mobile navigation is keyboard-operable with a visible focus indicator", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  const toggle = page.getByRole("button", { name: "Toggle navigation" });
+  await expect(toggle).toBeFocused();
+  const outlineWidth = await toggle.evaluate((element) => getComputedStyle(element).outlineWidth);
+  expect(outlineWidth).toBe("2px");
+  await page.keyboard.press("Enter");
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+});
+
+test("Book Now remains readable on hover and has no arrow glyph", async ({ page }) => {
+  await page.goto("/");
+  const bookNow = page.getByRole("link", { name: "Book Now" }).first();
+  await bookNow.hover();
+  const styles = await bookNow.evaluate((element) => ({
+    color: getComputedStyle(element).color,
+    visibility: getComputedStyle(element).visibility,
+    opacity: getComputedStyle(element).opacity,
+    text: element.textContent ?? "",
+  }));
+  expect(styles.visibility).toBe("visible");
+  expect(Number(styles.opacity)).toBeGreaterThan(0.9);
+  expect(styles.color).not.toBe("rgba(0, 0, 0, 0)");
+  expect(styles.text).not.toMatch(/[→➜➝➤]/);
+});
