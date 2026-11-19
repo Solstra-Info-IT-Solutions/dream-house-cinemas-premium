@@ -374,7 +374,7 @@ button, input, textarea, select, option {
 
 /* FINAL DESIGN SYSTEM OVERRIDES — one typeface, compact navigation, precise rhythm */
 :root {
-  --dhc-font: "Playfair Display", Georgia, serif;
+  --dhc-font: "Playfair Display";
   --dhc-gold: #f5b72f;
   --dhc-radius: 9px;
 }
@@ -1207,5 +1207,101 @@ html, body, button, input, textarea, select, option {
     min-height: 36px !important;
     padding: 6px 4px !important;
     font-size: .84rem !important;
+  }
+}
+
+
+/* QA correction: keep the equipment picker compact and readable at every width. */
+.dhc-site .dhc-booking-picker fieldset {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  min-width: 0;
+}
+.dhc-site .dhc-booking-picker label {
+  display: grid !important;
+  grid-template-columns: 16px minmax(0, 1fr) max-content !important;
+  align-items: center;
+  min-width: 0;
+  min-height: 40px !important;
+  gap: 10px !important;
+  padding: 7px 8px !important;
+  margin: 0;
+  font-size: .9rem !important;
+  line-height: 1.4 !important;
+}
+.dhc-site .dhc-booking-picker label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dhc-site .dhc-booking-picker label strong {
+  white-space: nowrap;
+  font-size: .86rem !important;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"] {
+  grid-column: 1 !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.dhc-site .dhc-catalogue-card-bottom {
+  display: grid !important;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 10px !important;
+  min-width: 0;
+}
+.dhc-site .dhc-catalogue-card-bottom strong {
+  min-width: 0;
+  white-space: nowrap;
+}
+.dhc-site .dhc-catalogue-card-bottom a {
+  min-width: 0;
+  justify-self: end;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.dhc-site .source-form input,
+.dhc-site .source-form textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+.dhc-site .source-form input:focus-visible,
+.dhc-site .source-form textarea:focus-visible,
+.dhc-site .dhc-booking-picker input:focus-visible {
+  outline: 2px solid #ffe09a;
+  outline-offset: 3px;
+}
+.dhc-site .source-tabs button[aria-pressed="true"] {
+  color: #17120a !important;
+  background: linear-gradient(135deg, #ffe39a 0%, #f5c34d 42%, #e5a51f 100%) !important;
+}
+.dhc-site .source-tabs button[aria-pressed="false"] {
+  color: #eee8df;
+}
+@media (max-width: 600px) {
+  .dhc-site .dhc-booking-picker label {
+    grid-template-columns: 16px minmax(0, 1fr) max-content !important;
+    gap: 8px !important;
+    padding-inline: 4px !important;
+    font-size: .86rem !important;
+  }
+  .dhc-site .dhc-booking-picker label strong {
+    font-size: .82rem !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dhc-site *,
+  .dhc-site *::before,
+  .dhc-site *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
