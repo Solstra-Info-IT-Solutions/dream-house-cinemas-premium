@@ -324,3 +324,17 @@ test("email fields reject malformed addresses with native validation", async ({ 
   await email.fill("client@example.com");
   expect(await email.evaluate((element: HTMLInputElement) => element.validity.typeMismatch)).toBe(false);
 });
+
+
+test("mobile header brand name and descriptor remain readable", async ({ page }) => {
+  for (const width of [320, 360, 390, 430]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/");
+    const sizes = await page.locator(".dhc-nav .brand-name").evaluate((element) => ({
+      name: Number.parseFloat(getComputedStyle(element).fontSize),
+      descriptor: Number.parseFloat(getComputedStyle(element.querySelector("small")!).fontSize),
+    }));
+    expect(sizes.name, `brand name at ${width}px`).toBeGreaterThanOrEqual(12);
+    expect(sizes.descriptor, `brand descriptor at ${width}px`).toBeGreaterThanOrEqual(10);
+  }
+});
