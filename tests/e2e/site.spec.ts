@@ -100,23 +100,28 @@ test("booking checkboxes render at the intended compact size", async ({ page }, 
   const checkbox = page.locator('.dhc-booking-picker input[type="checkbox"]').first();
   const size = await checkbox.evaluate((element) => {
     const rect = element.getBoundingClientRect();
-    const label = element.closest("label")!;
-    const name = label.querySelector("span")!;
-    const nameRect = name.getBoundingClientRect();
-    return {
-      width: rect.width,
-      height: rect.height,
-      labelWidth: label.getBoundingClientRect().width,
-      nameWidth: nameRect.width,
-      nameScrollWidth: name.scrollWidth,
-      nameClientWidth: name.clientWidth,
-    };
+    return { width: rect.width, height: rect.height };
   });
   expect(size.width).toBe(16);
   expect(size.height).toBe(16);
-  expect(size.labelWidth).toBeGreaterThan(250);
-  expect(size.nameWidth).toBeGreaterThan(120);
-  expect(size.nameScrollWidth).toBeLessThanOrEqual(size.nameClientWidth + 1);
+  const firstLabel = page.locator(".dhc-booking-picker fieldset label").first();
+  for (const width of [320, 360, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    const geometry = await firstLabel.evaluate((label) => {
+      const name = label.querySelector("span")!;
+      return {
+        labelWidth: label.getBoundingClientRect().width,
+        nameWidth: name.getBoundingClientRect().width,
+        nameScrollWidth: name.scrollWidth,
+        nameClientWidth: name.clientWidth,
+      };
+    });
+    expect(geometry.labelWidth, `label width at ${width}px`).toBeGreaterThan(180);
+    expect(geometry.nameWidth, `equipment name width at ${width}px`).toBeGreaterThan(100);
+    expect(geometry.nameScrollWidth, `equipment name wrapping at ${width}px`)
+      .toBeLessThanOrEqual(geometry.nameClientWidth + 1);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({
     path: testInfo.outputPath("booking-rental-picker-390.png"),
     fullPage: true,
