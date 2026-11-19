@@ -1209,3 +1209,43 @@ html, body, button, input, textarea, select, option {
     font-size: .84rem !important;
   }
 }
+
+
+/* QA hardening: keep the equipment picker compact and prevent text/price collisions. */
+.dhc-site .dhc-booking-picker fieldset { min-width: 0; }
+.dhc-site .dhc-booking-picker label {
+  display: grid !important;
+  grid-template-columns: 16px minmax(0, 1fr) max-content !important;
+  align-items: center;
+  gap: 8px !important;
+  min-width: 0;
+}
+.dhc-site .dhc-booking-picker label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px;
+  max-height: 16px;
+  flex: 0 0 16px;
+}
+.dhc-site .dhc-booking-picker label strong {
+  white-space: nowrap;
+  font-size: .82rem !important;
+}
+.dhc-site :focus-visible {
+  outline: 2px solid #ffe09a;
+  outline-offset: 3px;
+}
+@media (max-width: 420px) {
+  .dhc-site .dhc-booking-picker { padding: 11px; }
+  .dhc-site .dhc-booking-picker label { gap: 6px !important; }
+  .dhc-site .dhc-booking-picker label span { font-size: .82rem; }
+  .dhc-site .dhc-booking-picker label strong { font-size: .78rem !important; }
+  .dhc-site .dhc-catalogue-card-bottom { gap: 8px !important; }
+  .dhc-site .dhc-catalogue-card-bottom a { font-size: .72rem !important; }
+}
