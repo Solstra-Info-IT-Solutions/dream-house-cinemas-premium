@@ -230,3 +230,16 @@ test("all nine portfolio cards load real production imagery", async ({ page }) =
     ).toBe(true);
   }
 });
+
+
+test("cinematic homepage hero video loads metadata and is configured for muted inline playback", async ({ page }) => {
+  await page.goto("/");
+  const video = page.locator(".dhc-hero video").first();
+  await expect(video).toHaveAttribute("autoplay", "");
+  await expect(video).toHaveAttribute("muted", "");
+  await expect(video).toHaveAttribute("playsinline", "");
+  await expect.poll(
+    () => video.evaluate((element: HTMLVideoElement) => element.readyState >= 1 && element.videoWidth > 0),
+    { message: "hero video should load metadata and a video frame", timeout: 20_000 },
+  ).toBe(true);
+});
