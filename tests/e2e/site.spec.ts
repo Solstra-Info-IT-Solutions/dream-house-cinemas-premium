@@ -257,16 +257,21 @@ test("all nine portfolio cards load real production imagery", async ({ page }) =
 });
 
 
-test("cinematic homepage hero video loads metadata and is configured for muted inline playback", async ({ page }) => {
+test("all cinematic homepage video backdrops load metadata for muted inline playback", async ({ page }) => {
   await page.goto("/");
-  const video = page.locator(".dhc-hero video").first();
-  await expect(video).toHaveAttribute("autoplay", "");
-  await expect(video).toHaveAttribute("muted", "");
-  await expect(video).toHaveAttribute("playsinline", "");
-  await expect.poll(
-    () => video.evaluate((element: HTMLVideoElement) => element.readyState >= 1 && element.videoWidth > 0),
-    { message: "hero video should load metadata and a video frame", timeout: 20_000 },
-  ).toBe(true);
+  const videos = page.locator("main video");
+  const count = await videos.count();
+  expect(count).toBeGreaterThanOrEqual(4);
+  for (let index = 0; index < count; index += 1) {
+    const video = videos.nth(index);
+    await expect(video).toHaveAttribute("autoplay", "");
+    await expect(video).toHaveAttribute("muted", "");
+    await expect(video).toHaveAttribute("playsinline", "");
+    await expect.poll(
+      () => video.evaluate((element: HTMLVideoElement) => element.readyState >= 1 && element.videoWidth > 0),
+      { message: `homepage video ${index + 1} should load metadata and a video frame`, timeout: 20_000 },
+    ).toBe(true);
+  }
 });
 
 
