@@ -370,3 +370,472 @@ button, input, textarea, select, option {
     line-height: 1.55;
   }
 }
+
+
+/* FINAL DESIGN SYSTEM OVERRIDES — one typeface, compact navigation, precise rhythm */
+:root {
+  --dhc-font: "Playfair Display", Georgia, serif;
+  --dhc-gold: #f5b72f;
+  --dhc-radius: 9px;
+}
+html, body, button, input, textarea, select, option {
+  font-family: var(--dhc-font) !important;
+}
+.dhc-site,
+.dhc-site *,
+.dhc-site *::before,
+.dhc-site *::after,
+.dhc-site button,
+.dhc-site input,
+.dhc-site textarea,
+.dhc-site select,
+.dhc-site option {
+  font-family: var(--dhc-font) !important;
+}
+.dhc-site {
+  --dhc-gutter: clamp(20px, 4vw, 58px);
+  color: #f4f0e9;
+  font-size: 16px;
+  line-height: 1.65;
+  font-synthesis: none;
+}
+.dhc-site .wrap {
+  width: min(1240px, calc(100% - (var(--dhc-gutter) * 2)));
+  margin-inline: auto;
+}
+.dhc-site p {
+  font-size: clamp(1rem, .96rem + .16vw, 1.1rem);
+  line-height: 1.75;
+  max-width: 66ch;
+  margin-block: 0 1.1rem;
+  overflow-wrap: break-word;
+}
+.dhc-site h1 {
+  font-size: clamp(2.8rem, 5.7vw, 5.8rem);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+.dhc-site h2 {
+  font-size: clamp(2.25rem, 4.1vw, 4.2rem);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+.dhc-site h3 {
+  font-size: clamp(1.35rem, 1.6vw, 1.8rem);
+  line-height: 1.22;
+}
+.dhc-site h1,.dhc-site h2,.dhc-site h3,.dhc-site h4 {
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: pretty;
+}
+.dhc-site .eyebrow {
+  font-size: clamp(.75rem, .72rem + .1vw, .84rem);
+  line-height: 1.55;
+  letter-spacing: .14em;
+}
+
+/* Less crowded header: five primary links and one clear booking action. */
+.dhc-site .dhc-nav {
+  height: 78px;
+  min-height: 78px;
+  padding: 0 clamp(20px, 3.2vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 2vw, 28px);
+  background: rgba(5,5,5,.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.dhc-site .dhc-nav .brand {
+  flex: 0 1 auto;
+  min-width: 0;
+  gap: 11px;
+}
+.dhc-site .dhc-nav .brand-mark {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+}
+.dhc-site .dhc-nav .brand-name {
+  font-size: clamp(.75rem, .78vw, .88rem);
+  line-height: 1.3;
+  letter-spacing: .09em;
+  white-space: nowrap;
+}
+.dhc-site .dhc-nav .brand-name small {
+  margin-top: 4px;
+  font-size: .64rem;
+  line-height: 1.25;
+  letter-spacing: .11em;
+}
+.dhc-site .dhc-nav .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(12px, 1.35vw, 20px);
+  min-width: 0;
+  color: #e9e4dc;
+  font-size: clamp(.78rem, .78vw, .88rem);
+  letter-spacing: .035em;
+  white-space: nowrap;
+}
+.dhc-site .dhc-nav .nav-links > a:not(.nav-cta) {
+  padding: 10px 0;
+}
+.dhc-site .dhc-nav .nav-links > a:not(.nav-cta):hover {
+  color: var(--dhc-gold);
+}
+.dhc-site .dhc-nav .nav-cta,
+.dhc-site .button-gold,
+.dhc-site .button-line,
+.dhc-site button,
+.dhc-site .dhc-catalogue-toggle {
+  border-radius: var(--dhc-radius);
+}
+.dhc-site .dhc-nav .nav-cta {
+  min-height: 42px;
+  padding: 10px 15px;
+  font-size: .78rem;
+  letter-spacing: .055em;
+  gap: 8px;
+}
+.dhc-site .mobile-menu {
+  display: none;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: 1px solid rgba(245,183,47,.55);
+  background: rgba(0,0,0,.3);
+  color: var(--dhc-gold);
+}
+.dhc-site .mobile-panel {
+  display: none;
+}
+
+/* Rounded-rectangle buttons: consistent shape, readable labels and touch targets. */
+.dhc-site .button-gold,
+.dhc-site .button-line,
+.dhc-site .nav-cta,
+.dhc-site .source-filter button,
+.dhc-site .source-tabs button,
+.dhc-site .dhc-catalogue-toggle,
+.dhc-site button[type="submit"] {
+  min-height: 46px;
+  padding: 12px 18px;
+  border-radius: 9px;
+  font-size: clamp(.82rem, .78rem + .12vw, .94rem);
+  line-height: 1.35;
+  letter-spacing: .045em;
+  white-space: normal;
+  text-align: center;
+}
+.dhc-site .button-gold {
+  background: var(--dhc-gold);
+  color: #111;
+  border: 1px solid var(--dhc-gold);
+}
+.dhc-site .button-line {
+  border: 1px solid rgba(255,255,255,.38);
+  background: rgba(0,0,0,.12);
+  color: #f3eee6;
+}
+.dhc-site .button-gold:hover,
+.dhc-site .button-line:hover,
+.dhc-site .dhc-catalogue-toggle:hover {
+  transform: translateY(-1px);
+}
+.dhc-site a:focus-visible,
+.dhc-site button:focus-visible,
+.dhc-site input:focus-visible,
+.dhc-site textarea:focus-visible {
+  outline: 2px solid var(--dhc-gold);
+  outline-offset: 3px;
+}
+
+/* Exact client-supplied inventory. Compact cards avoid oversized empty boxes. */
+.dhc-site .dhc-catalogue {
+  display: grid;
+  gap: clamp(30px, 4vw, 48px);
+  width: 100%;
+}
+.dhc-site .dhc-catalogue-category {
+  min-width: 0;
+  margin: 0;
+}
+.dhc-site .dhc-catalogue-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(245,183,47,.28);
+}
+.dhc-site .dhc-catalogue-heading h3 {
+  margin: 4px 0 0;
+  color: #f5f0e8;
+  font-size: clamp(1.65rem, 2.5vw, 2.2rem);
+  line-height: 1.12;
+}
+.dhc-site .dhc-catalogue-count {
+  color: #aaa39b;
+  font-size: .82rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.dhc-site .dhc-catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.dhc-site .dhc-catalogue-card {
+  min-width: 0;
+  min-height: 126px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 13px;
+  padding: 16px 17px 14px;
+  background: linear-gradient(145deg, #171717, #101010);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 8px;
+  transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+.dhc-site .dhc-catalogue-card:hover {
+  border-color: rgba(245,183,47,.55);
+  transform: translateY(-2px);
+  background: #191816;
+}
+.dhc-site .dhc-catalogue-index {
+  color: #a58b5b;
+  font-size: .7rem;
+  line-height: 1;
+  letter-spacing: .12em;
+}
+.dhc-site .dhc-catalogue-card h4 {
+  margin: 0;
+  color: #f4f0e9;
+  font-size: clamp(1rem, 1.1vw, 1.18rem);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.dhc-site .dhc-catalogue-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dhc-site .dhc-catalogue-card-bottom strong {
+  color: var(--dhc-gold);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.dhc-site .dhc-catalogue-card-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #d9d1c4;
+  font-size: .78rem;
+  line-height: 1.35;
+}
+.dhc-site .dhc-catalogue-card-bottom a:hover { color: var(--dhc-gold); }
+.dhc-site .dhc-catalogue-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 140px;
+  margin: 16px auto 0;
+  padding: 10px 18px;
+  color: var(--dhc-gold);
+  background: transparent;
+  border: 1px solid rgba(245,183,47,.55);
+  cursor: pointer;
+}
+.dhc-site .dhc-catalogue-compact {
+  gap: 26px;
+}
+.dhc-site .dhc-catalogue-compact .dhc-catalogue-heading {
+  margin-bottom: 12px;
+}
+.dhc-site .dhc-catalogue-compact .dhc-catalogue-card {
+  min-height: 112px;
+  padding: 13px 14px 12px;
+}
+.dhc-site .dhc-rental .section-head {
+  margin-bottom: 30px;
+  gap: 28px;
+  align-items: end;
+}
+.dhc-site .dhc-rental-note {
+  margin-top: 28px;
+}
+
+/* Booking equipment picker */
+.dhc-site .dhc-booking-picker {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  margin: 8px 0;
+  padding: 18px;
+  border: 1px solid rgba(245,183,47,.25);
+  border-radius: 9px;
+  background: #101010;
+}
+.dhc-site .dhc-booking-picker h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+.dhc-site .dhc-booking-picker > p {
+  margin: 0;
+  font-size: .95rem;
+}
+.dhc-site .dhc-booking-picker fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 8px;
+}
+.dhc-site .dhc-booking-picker legend {
+  padding: 0 7px;
+  color: var(--dhc-gold);
+  font-size: 1.1rem;
+}
+.dhc-site .dhc-booking-picker label {
+  display: grid;
+  grid-template-columns: 18px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  font-size: .92rem;
+  line-height: 1.4;
+}
+.dhc-site .dhc-booking-picker label:last-child { border-bottom: 0; }
+.dhc-site .dhc-booking-picker input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  accent-color: var(--dhc-gold);
+}
+.dhc-site .dhc-booking-picker label strong {
+  color: var(--dhc-gold);
+  font-size: .88rem;
+  white-space: nowrap;
+}
+.dhc-site .dhc-booking-estimate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 13px 15px;
+  border-radius: 8px;
+  background: rgba(245,183,47,.09);
+}
+.dhc-site .dhc-booking-estimate span { font-size: .9rem; }
+.dhc-site .dhc-booking-estimate strong { color: var(--dhc-gold); font-size: 1.25rem; }
+
+/* Consistent section rhythm; remove large accidental vertical gaps. */
+.dhc-site .dhc-intro,
+.dhc-site .dhc-services,
+.dhc-site .dhc-rental,
+.dhc-site .dhc-process,
+.dhc-site .dhc-about-story,
+.dhc-site .dhc-about-cta,
+.dhc-site .source-content,
+.dhc-site .source-works,
+.dhc-site .source-contact,
+.dhc-site .source-form-wrap {
+  padding-block: clamp(64px, 7vw, 104px);
+}
+.dhc-site .dhc-hero-content {
+  padding-block: clamp(130px, 15vh, 176px) clamp(100px, 12vh, 140px);
+}
+.dhc-site .dhc-service-grid {
+  gap: 16px;
+}
+.dhc-site .dhc-service {
+  padding: 22px 20px 26px;
+}
+.dhc-site .dhc-service h3 { margin: 18px 0 9px; }
+.dhc-site .dhc-service p { margin: 0; }
+.dhc-site .source-page-hero {
+  padding-block: clamp(64px, 7vw, 100px) clamp(44px, 5vw, 66px);
+}
+.dhc-site .source-content { padding-top: 22px; }
+.dhc-site .source-bottom-cta { margin-top: 30px; }
+.dhc-site .footer { padding-block: 26px 32px; }
+
+/* Switch to compact menu before browser zoom squeezes navigation. */
+@media (max-width: 1180px) {
+  .dhc-site .dhc-nav .nav-links { display: none; }
+  .dhc-site .dhc-nav .mobile-menu { display: inline-flex; }
+  .dhc-site .dhc-nav .mobile-panel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    padding: 10px 22px 18px;
+    background: rgba(8,8,8,.98);
+    border-bottom: 1px solid rgba(245,183,47,.3);
+    box-shadow: 0 18px 32px rgba(0,0,0,.38);
+  }
+  .dhc-site .dhc-nav .mobile-panel a {
+    padding: 13px 4px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    color: #eee8df;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+  .dhc-site .dhc-nav .mobile-panel a:last-child { border-bottom: 0; }
+}
+@media (max-width: 900px) {
+  .dhc-site .dhc-catalogue-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .dhc-site .dhc-intro,
+  .dhc-site .dhc-process,
+  .dhc-site .dhc-about-story { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 560px) {
+  .dhc-site { --dhc-gutter: 18px; }
+  .dhc-site .dhc-nav {
+    height: 70px;
+    min-height: 70px;
+    padding-inline: 16px;
+  }
+  .dhc-site .dhc-nav .brand-mark {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  .dhc-site .dhc-nav .brand-name { font-size: .72rem; letter-spacing: .06em; }
+  .dhc-site .dhc-nav .brand-name small { font-size: .59rem; letter-spacing: .07em; }
+  .dhc-site .dhc-hero-content { padding-top: 116px; }
+  .dhc-site .dhc-catalogue-grid { grid-template-columns: 1fr; gap: 9px; }
+  .dhc-site .dhc-catalogue-card,
+  .dhc-site .dhc-catalogue-compact .dhc-catalogue-card {
+    min-height: 104px;
+    padding: 13px 14px;
+  }
+  .dhc-site .dhc-catalogue-card h4 { font-size: 1.08rem; }
+  .dhc-site .dhc-catalogue-card-bottom strong { font-size: 1rem; }
+  .dhc-site .dhc-booking-picker { padding: 13px; }
+  .dhc-site .dhc-booking-picker fieldset { padding: 10px; }
+  .dhc-site .dhc-booking-picker label { font-size: .86rem; gap: 7px; }
+  .dhc-site .dhc-booking-picker label strong { font-size: .82rem; }
+}
