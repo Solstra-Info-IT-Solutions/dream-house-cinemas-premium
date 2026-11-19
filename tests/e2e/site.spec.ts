@@ -148,3 +148,16 @@ test("security response headers are present on public routes", async ({ request 
   expect(headers["strict-transport-security"]).toContain("max-age=63072000");
   expect(headers["permissions-policy"]).toContain("camera=()");
 });
+
+test("the declared typography uses Playfair Display only", async ({ page }) => {
+  await page.goto("/");
+  const selectors = [".brand-name", "main h1", "main p", "button", "a", "input", "textarea"];
+  for (const selector of selectors) {
+    const locator = page.locator(selector).first();
+    if (await locator.count()) {
+      const family = await locator.evaluate((element) => getComputedStyle(element).fontFamily);
+      expect(family, `Unexpected font family for ${selector}`).toContain("Playfair Display");
+      expect(family).not.toMatch(/Georgia|serif|sans-serif|Arial/i);
+    }
+  }
+});
