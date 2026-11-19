@@ -105,3 +105,56 @@ for (const route of ["/", "/book", "/contact"]) {
     expect(serious, JSON.stringify(serious, null, 2)).toEqual([]);
   });
 }
+
+
+test("enquiry forms expose accessible names and required constraints", async ({ page }) => {
+  await page.goto("/book");
+  await expect(page.getByRole("textbox", { name: "Your name" })).toHaveAttribute("required", "");
+  await expect(page.getByRole("textbox", { name: "Phone or WhatsApp number" })).toHaveAttribute("required", "");
+  await expect(page.getByRole("textbox", { name: "Email address" })).toHaveAttribute("type", "email");
+  await expect(page.getByRole("textbox", { name: "Project type" })).toHaveAttribute("required", "");
+  await expect(page.getByRole("textbox", { name: "Shoot location" })).toHaveAttribute("required", "");
+  await page.goto("/contact");
+  await expect(page.getByRole("textbox", { name: "Your name" })).toHaveAttribute("required", "");
+  await expect(page.getByRole("textbox", { name: "Message" })).toHaveAttribute("required", "");
+});
+
+test("baseline security headers are present on page responses", async ({ page }) => {
+  const response = await page.goto("/");
+  const headers = await response?.allHeaders();
+  expect(headers?.["x-content-type-options"]).toBe("nosniff");
+  expect(headers?.["x-frame-options"]).toBe("SAMEORIGIN");
+  expect(headers?.["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(headers?.["permissions-policy"]).toContain("camera=()");
+});
+
+test("key cinema imagery loads successfully", async ({ page }) => {
+  await page.goto("/");
+  const logo = page.locator(".dhc-nav .brand img").first();
+  await expect.poll(() => logo.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0), {
+    message: "Header logo should load as a real image",
+    timeout: 15_000,
+  }).toBe(true);
+  await page.goto("/rental");
+  const heroImage = page.locator(".source-page-visual img");
+  await expect.poll(() => heroImage.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0), {
+    message: "Rental hero image should load as a real image",
+    timeout: 15_000,
+  }).toBe(true);
+});
+
+test("key routes remain usable in landscape orientation", async ({ page }) => {
+  for (const route of routes) {
+    for (const viewport of [{ width: 844, height: 390 }, { width: 932, height: 430 }, { width: 1366, height: 768 }]) {
+      await page.setViewportSize(viewport);
+      const response = await page.goto(route, { waitUntil: "domcontentloaded" });
+      expect(response?.status()).toBe(200);
+      const dimensions = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth,
+      }));
+      expect(dimensions.document, `landscape overflow on ${route} at ${viewport.width}x${viewport.height}`)
+        .toBeLessThanOrEqual(dimensions.viewport + 2);
+    }
+  }
+});
