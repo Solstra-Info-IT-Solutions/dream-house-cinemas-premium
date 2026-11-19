@@ -2,7 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Aperture, ArrowDown, ArrowUpRight, Camera, Clapperboard, Focus, Lightbulb, Menu, Monitor, Move3D, Radio, Video as VideoIcon, X } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const V = {
   hero: "https://videos.pexels.com/video-files/36604690/15520309_1920_1080_25fps.mp4",
@@ -142,10 +142,9 @@ export function WorksPage(){
  return <main className="site-shell dhc-site"><Header/><section className="wrap source-works"><div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the kinds of stories and visual projects Dream House Cinemas creates.</p></div><div className="source-filter">{[["all","ALL"],["ad","AD FILMS"],["doc","DOCUMENTARIES"],["corp","CORPORATE FILMS"],["brand","BRAND FILMS"],["promo","PROMOTIONAL"]].map(([v,t])=><button key={v} onClick={()=>setFilter(v)} className={filter===v?"active":""}>{t}</button>)}</div><div className="source-work-grid">{workItems.filter(([cat])=>filter==="all"||filter===cat).map(([cat,label,img],i)=><article key={img}><img src={SOURCE_ASSET+img} alt={label} loading="lazy"/><div className="source-work-overlay"><small>0{(i+1)} / DHC PORTFOLIO</small><span>{label}</span></div><i aria-hidden="true"><ArrowUpRight size={18}/></i></article>)}</div><p className="source-disclaimer">Project imagery shown as portfolio category previews. Actual project films can be added when the client’s final reel links are supplied.</p></section><Footer/></main>;
 }
 export function BookPage(){
- const params=typeof window!=="undefined"?new URLSearchParams(window.location.search):null;
- const initialType=params?.get("type")==="rental"?"rental":"production";
- const [kind,setKind]=useState(initialType);
- const [selected,setSelected]=useState<string[]>(params?.get("item")?[params.get("item") as string]:[]);
+ const [kind,setKind]=useState("production");
+ const [selected,setSelected]=useState<string[]>([]);
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);if(params.get("type")==="rental")setKind("rental");const item=params.get("item");if(item)setSelected([item]);},[]);
  const allEquipment=[...equipment.camera,...equipment.lights];
  const toggleItem=(name:string)=>setSelected(current=>current.includes(name)?current.filter(x=>x!==name):[...current,name]);
  const selectedTotal=selected.reduce((sum,name)=>sum+(allEquipment.find(x=>x.name===name)?.price||0),0);
