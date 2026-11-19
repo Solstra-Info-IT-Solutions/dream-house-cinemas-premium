@@ -202,9 +202,9 @@ test("catalogue titles, prices and enquiry links never overlap at narrow and des
     const price = await card.locator("strong").boundingBox();
     const action = await card.getByRole("link", { name: "Add to enquiry" }).boundingBox();
     expect(title && bottom && price && action).toBeTruthy();
-    expect(title!.bottom).toBeLessThanOrEqual(bottom!.y + 1);
-    expect(price!.right).toBeLessThanOrEqual(action!.x + 1);
-    expect(action!.right).toBeLessThanOrEqual(bottom!.right + 1);
+    expect(title!.y + title!.height).toBeLessThanOrEqual(bottom!.y + 1);
+    expect(price!.x + price!.width).toBeLessThanOrEqual(action!.x + 1);
+    expect(action!.x + action!.width).toBeLessThanOrEqual(bottom!.x + bottom!.width + 1);
   }
 });
 
@@ -220,8 +220,9 @@ test("booking checkbox rows keep text and prices in separate non-overlapping tra
     expect(checkbox && name && price).toBeTruthy();
     expect(checkbox!.width).toBe(16);
     expect(checkbox!.height).toBe(16);
-    expect(checkbox!.right).toBeLessThanOrEqual(name!.x + 1);
-    expect(name!.right).toBeLessThanOrEqual(price!.x + 1);
-    expect(price!.right).toBeLessThanOrEqual((await row.boundingBox())!.right + 1);
+    expect(checkbox!.x + checkbox!.width).toBeLessThanOrEqual(name!.x + 1);
+    expect(name!.x + name!.width).toBeLessThanOrEqual(price!.x + 1);
+    const rowBox = await row.boundingBox();
+    expect(price!.x + price!.width).toBeLessThanOrEqual(rowBox!.x + rowBox!.width + 1);
   }
 });
