@@ -1037,3 +1037,175 @@ html, body, button, input, textarea, select, option {
     gap: 9px;
   }
 }
+
+
+/* Layout correction: prevent equipment names, prices and actions from colliding. */
+.dhc-site .dhc-catalogue-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  align-items: stretch;
+  gap: 14px !important;
+}
+.dhc-site .dhc-catalogue-card,
+.dhc-site .dhc-catalogue-compact .dhc-catalogue-card {
+  display: grid !important;
+  grid-template-rows: minmax(2.8em, auto) auto !important;
+  align-content: space-between;
+  justify-content: initial;
+  min-width: 0;
+  min-height: 116px;
+  height: auto;
+  gap: 14px;
+  padding: 15px 16px !important;
+}
+.dhc-site .dhc-catalogue-card h4 {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.dhc-site .dhc-catalogue-card-bottom {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+  min-width: 0;
+}
+.dhc-site .dhc-catalogue-card-bottom strong {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: .98rem !important;
+}
+.dhc-site .dhc-catalogue-card-bottom a {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: normal;
+  text-align: right;
+  font-size: .76rem !important;
+  line-height: 1.35;
+}
+.dhc-site .dhc-catalogue-heading h3 {
+  font-size: 1.7rem !important;
+  line-height: 1.2 !important;
+  font-weight: 400 !important;
+}
+.dhc-site .dhc-booking-picker {
+  gap: 12px;
+}
+.dhc-site .dhc-booking-picker fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  column-gap: 18px;
+  row-gap: 0;
+  align-content: start;
+}
+.dhc-site .dhc-booking-picker legend {
+  grid-column: 1 / -1;
+  margin-bottom: 7px;
+}
+.dhc-site .dhc-booking-picker label {
+  display: grid !important;
+  grid-template-columns: 16px minmax(0,1fr) auto !important;
+  align-items: center;
+  min-width: 0;
+  min-height: 38px !important;
+  padding: 6px 7px !important;
+  margin: 0;
+  gap: 8px !important;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  border-radius: 4px;
+  font-size: .86rem !important;
+  line-height: 1.35 !important;
+  background: transparent;
+}
+.dhc-site .dhc-booking-picker label:hover {
+  background: rgba(245,183,47,.055);
+}
+.dhc-site .dhc-booking-picker label:has(input[type="checkbox"]:checked) {
+  background: rgba(245,183,47,.09);
+}
+.dhc-site .dhc-booking-picker label span {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.35;
+}
+.dhc-site .dhc-booking-picker label strong {
+  white-space: nowrap;
+  font-size: .82rem !important;
+  line-height: 1.3;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  display: grid !important;
+  place-content: center;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px;
+  max-height: 16px;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1px solid rgba(245,183,47,.8) !important;
+  border-radius: 4px !important;
+  background: #101010 !important;
+  box-shadow: none;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"]::before {
+  content: "";
+  width: 7px;
+  height: 4px;
+  border: solid #17120a;
+  border-width: 0 0 1.5px 1.5px;
+  transform: rotate(-45deg) scale(0);
+  transition: transform .12s ease;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"]:checked {
+  background: linear-gradient(135deg,#ffe39a,#e5a51f) !important;
+  border-color: #ffda78 !important;
+}
+.dhc-site .dhc-booking-picker input[type="checkbox"]:checked::before {
+  transform: rotate(-45deg) scale(1);
+}
+.dhc-site .dhc-booking-picker label:has(input[type="checkbox"]:checked) {
+  border-color: transparent;
+  border-bottom-color: rgba(245,183,47,.25);
+}
+.dhc-site .dhc-booking-estimate {
+  margin-top: 3px;
+}
+@media (max-width: 900px) {
+  .dhc-site .dhc-catalogue-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media (max-width: 640px) {
+  .dhc-site .dhc-catalogue-grid {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+  .dhc-site .dhc-catalogue-card,
+  .dhc-site .dhc-catalogue-compact .dhc-catalogue-card {
+    min-height: 96px;
+    grid-template-rows: auto auto !important;
+    padding: 12px 13px !important;
+  }
+  .dhc-site .dhc-booking-picker fieldset {
+    grid-template-columns: minmax(0,1fr);
+    padding: 9px 10px;
+  }
+  .dhc-site .dhc-booking-picker label {
+    min-height: 36px !important;
+    padding: 6px 4px !important;
+    font-size: .84rem !important;
+  }
+}
