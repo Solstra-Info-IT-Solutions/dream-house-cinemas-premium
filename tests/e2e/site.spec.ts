@@ -204,3 +204,18 @@ test("scroll-reveal service cards become visible when they enter the viewport", 
     { message: "service card should reveal on scroll", timeout: 5_000 },
   ).toBe(1);
 });
+
+
+test("all nine portfolio cards load real production imagery", async ({ page }) => {
+  await page.goto("/works");
+  const images = page.locator(".source-work-grid img");
+  await expect(images).toHaveCount(9);
+  for (let index = 0; index < 9; index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(
+      () => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0),
+      { message: `portfolio image ${index + 1} should load`, timeout: 15_000 },
+    ).toBe(true);
+  }
+});
