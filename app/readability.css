@@ -122,3 +122,129 @@ body,.dhc-site{font-size:16px;line-height:1.65}
  .dhc-site .source-tabs button{font-size:12px;padding-inline:10px}
 }
 @media(prefers-reduced-motion:reduce){.dhc-site *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* FINAL CASCADE FIX — restore component-specific display type after global body rules.
+   Keep editorial copy readable while preventing cinematic titles from collapsing to 16px. */
+main.dhc-site .dhc-band-copy p,
+main.dhc-site .dhc-reel-caption p,
+main.dhc-site .dhc-about-image p {
+  font-size:clamp(44px,7.2vw,96px);
+  line-height:1.02;
+  letter-spacing:-.035em;
+  max-width:12ch;
+  color:#f4f0e9;
+  margin:18px 0 24px;
+}
+main.dhc-site .dhc-band-copy .eyebrow,
+main.dhc-site .dhc-reel-caption .eyebrow,
+main.dhc-site .dhc-about-image .eyebrow {
+  display:block;
+  font-size:clamp(13px,.95vw,15px);
+  line-height:1.6;
+  letter-spacing:.16em;
+  color:#f5b72f;
+}
+main.dhc-site .dhc-band-copy>span:last-child {
+  display:block;
+  font-size:clamp(12px,.9vw,14px);
+  line-height:1.6;
+  letter-spacing:.15em;
+  color:#ded8cf;
+}
+main.dhc-site .section-head h2,
+main.dhc-site .dhc-intro h2,
+main.dhc-site .dhc-process-copy h2,
+main.dhc-site .dhc-contact h2,
+main.dhc-site .dhc-about-story h2,
+main.dhc-site .dhc-about-pillars h2,
+main.dhc-site .dhc-about-cta h2 {
+  font-size:clamp(38px,5.2vw,72px);
+  line-height:1.08;
+  letter-spacing:-.03em;
+  margin-block:16px 22px;
+}
+main.dhc-site .dhc-hero-content h1 {
+  font-size:clamp(48px,7.3vw,104px);
+  line-height:1.04;
+}
+main.dhc-site .source-page-hero-copy h1,
+main.dhc-site .source-form-wrap h1,
+main.dhc-site .source-contact h1,
+main.dhc-site .source-works-intro h1 {
+  font-size:clamp(42px,6.4vw,82px);
+  line-height:1.08;
+  margin-block:18px 22px;
+}
+main.dhc-site .dhc-service h3,
+main.dhc-site .source-service-grid h2,
+main.dhc-site .dhc-catalogue-heading h3 {
+  font-size:clamp(21px,2vw,29px);
+  line-height:1.28;
+}
+main.dhc-site .dhc-service p,
+main.dhc-site .source-service-grid p,
+main.dhc-site .dhc-intro-copy p,
+main.dhc-site .dhc-process-copy p,
+main.dhc-site .dhc-rental-lede,
+main.dhc-site .source-page-hero-copy p,
+main.dhc-site .source-contact-intro,
+main.dhc-site .source-content p {
+  font-size:clamp(16px,1.12vw,18px);
+  line-height:1.8;
+  color:#c9c3ba;
+}
+main.dhc-site .dhc-intro-copy .large {
+  font-size:clamp(21px,2vw,28px);
+  line-height:1.55;
+  color:#eee7dd;
+}
+main.dhc-site .dhc-hero-foot,
+main.dhc-site .source-visual-caption,
+main.dhc-site .source-trust,
+main.dhc-site .source-trust-strip,
+main.dhc-site .source-disclaimer,
+main.dhc-site .dhc-service>span {
+  font-size:clamp(11px,.86vw,13px);
+  line-height:1.6;
+}
+main.dhc-site .dhc-catalogue-card h4 {font-size:clamp(16px,1.2vw,19px);line-height:1.4}
+main.dhc-site .dhc-catalogue-card-bottom a {font-size:13px;line-height:1.45}
+main.dhc-site .dhc-catalogue-card-bottom strong {font-size:18px}
+main.dhc-site .source-form label,
+main.dhc-site .source-form fieldset legend,
+main.dhc-site .dhc-booking-picker label,
+main.dhc-site .dhc-booking-picker label strong {font-size:16px;line-height:1.6}
+main.dhc-site .source-form input,
+main.dhc-site .source-form textarea,
+main.dhc-site .source-form select {font-size:16px;line-height:1.55;min-height:52px}
+main.dhc-site .source-form input::placeholder,
+main.dhc-site .source-form textarea::placeholder {font-size:15px;opacity:1;color:#c9c3ba}
+@media(max-width:900px) {
+ main.dhc-site .dhc-band-copy p,
+ main.dhc-site .dhc-reel-caption p {font-size:clamp(42px,8vw,72px)}
+ main.dhc-site .section-head h2,
+ main.dhc-site .dhc-intro h2,
+ main.dhc-site .dhc-process-copy h2 {font-size:clamp(38px,7vw,58px)}
+}
+@media(max-width:600px) {
+ main.dhc-site .dhc-band-copy p,
+ main.dhc-site .dhc-reel-caption p {font-size:clamp(38px,10.5vw,54px);line-height:1.08;max-width:11ch}
+ main.dhc-site .dhc-band-copy .eyebrow {font-size:12px}
+ main.dhc-site .dhc-band-copy>span:last-child {font-size:11px;letter-spacing:.1em}
+ main.dhc-site .section-head h2,
+ main.dhc-site .dhc-intro h2,
+ main.dhc-site .dhc-process-copy h2,
+ main.dhc-site .dhc-contact h2,
+ main.dhc-site .dhc-about-story h2,
+ main.dhc-site .source-page-hero-copy h1,
+ main.dhc-site .source-form-wrap h1,
+ main.dhc-site .source-contact h1 {font-size:clamp(36px,10vw,52px);line-height:1.1}
+ main.dhc-site .dhc-service p,
+ main.dhc-site .source-service-grid p,
+ main.dhc-site .dhc-intro-copy p,
+ main.dhc-site .dhc-process-copy p,
+ main.dhc-site .dhc-rental-lede,
+ main.dhc-site .source-page-hero-copy p,
+ main.dhc-site .source-content p {font-size:16px;line-height:1.75}
+ main.dhc-site .dhc-hero-foot {font-size:10px}
+}
