@@ -358,3 +358,13 @@ test("mobile header brand name and descriptor remain readable", async ({ page })
     await expect(menu).toBeVisible();
   }
 });
+
+
+test("all public routes are free of visible placeholder copy and placeholder alt text", async ({ page }) => {
+  for (const route of routes) {
+    await page.goto(route);
+    await expect(page.getByText(/placeholder/i)).toHaveCount(0);
+    const placeholderAlt = page.locator('img[alt*="placeholder" i]');
+    await expect(placeholderAlt).toHaveCount(0);
+  }
+});
