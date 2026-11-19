@@ -93,7 +93,7 @@ export function HomePage(){
   <section id="rental" className="dhc-rental"><div className="wrap"><div className="section-head"><div><span className="eyebrow">02 / Equipment rental</span><h2 className="serif">The right tools<br/>for <em>your vision.</em></h2></div><p className="dhc-rental-lede">Build your kit around the shoot. Tell us your dates, production requirements and preferred setup — our team can help with a rental enquiry.</p></div>
    <div className="dhc-rental-category">
     <div className="dhc-rental-category-head"><div><span className="eyebrow">01 / Camera equipment</span><h3 className="serif">Camera <em>rental</em></h3></div><span className="dhc-rental-count">03 ITEMS</span></div>
-    <div className="dhc-equipment-grid dhc-equipment-list">{equipment.camera.slice(0,showAllCamera?equipment.camera.length:6).map((item,i)=><motion.article className="dhc-equipment-card dhc-rental-item" key={item.name} {...reveal}><div className="dhc-equipment-info"><span className="dhc-rental-item-no">C / 0{i+1}</span><h4>{item.name}</h4><p className="dhc-item-price">₹{item.price.toLocaleString("en-IN")} <small>/ day</small></p><a href={`/book?type=rental&item=${encodeURIComponent(item.name)}`}>Add to enquiry <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
+    <div className="dhc-equipment-grid dhc-equipment-list">{equipment.camera.slice(0,showAllCamera?equipment.camera.length:6).map((item,i)=><motion.article className="dhc-equipment-card dhc-rental-item" key={item.name} {...reveal}><div className="dhc-equipment-info"><span className="dhc-rental-item-no">C / 0{i+1}</span><h4>{item.name}</h4><p className="dhc-item-price">₹{item.price.toLocaleString("en-IN")} <small>rental rate</small></p><a href={`/book?type=rental&item=${encodeURIComponent(item.name)}`}>Add to enquiry <ArrowUpRight size={14}/></a></div></motion.article>)}</div>
     {equipment.camera.length>6&&<button className="dhc-view-more" onClick={()=>setShowAllCamera(!showAllCamera)}>{showAllCamera?"View Less":"View More"} <ArrowDown size={14}/></button>}
   </div>
   <div className="dhc-rental-category">
@@ -169,19 +169,19 @@ export function BookPage(){
     <label className="dhc-form-field"><span>Number of rental days</span><input name="Rental days" type="number" min="1" placeholder="e.g. 1"/></label>
     {kind==="rental"&&<>
       <h2>SELECT EQUIPMENT</h2>
-      <p className="dhc-form-hint">Select the camera and lighting equipment you need. Listed prices are per day; final availability and quote will be confirmed by our team.</p>
+      <p className="dhc-form-hint">Select the camera and lighting equipment you need. Listed rates are indicative; final availability and quote will be confirmed by our team.</p>
       <div className="dhc-booking-equipment">
        <div><h3>Camera</h3>{equipment.camera.map(item=><label className="dhc-equipment-check" key={item.name}><input type="checkbox" checked={selected.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><b>₹{item.price.toLocaleString("en-IN")}</b></label>)}</div>
        <div><h3>Lights</h3>{equipment.lights.map(item=><label className="dhc-equipment-check" key={item.name}><input type="checkbox" checked={selected.includes(item.name)} onChange={()=>toggleItem(item.name)}/><span>{item.name}</span><b>₹{item.price.toLocaleString("en-IN")}</b></label>)}</div>
       </div>
       <input type="hidden" name="Selected equipment" value={selected.join(", ")}/>
-      <input type="hidden" name="Indicative daily equipment total" value={`₹${selectedTotal.toLocaleString("en-IN")} (subject to confirmation)`}/>
-      <div className="dhc-booking-total"><span>{selected.length} items selected · indicative daily total</span><strong>₹{selectedTotal.toLocaleString("en-IN")}</strong></div>
+      <input type="hidden" name="Indicative equipment total" value={`₹${selectedTotal.toLocaleString("en-IN")} (subject to confirmation)`}/>
+      <div className="dhc-booking-total"><span>{selected.length} items selected · indicative total</span><strong>₹{selectedTotal.toLocaleString("en-IN")}</strong></div>
     </>}
     <h2>PROJECT BRIEF</h2>
     <textarea name="Project brief" placeholder="Tell us about your project, equipment requirements, number of shoot days and any other details *" required/>
     <button className="button-gold" type="submit">Send Enquiry <ArrowUpRight size={15}/></button>
-    <small>Rental prices are indicative per day. Availability, rental duration, delivery and final quote will be confirmed by Dream House Cinemas.</small>
+    <small>Listed rates are indicative. Availability, rental duration, delivery and the final quote will be confirmed by Dream House Cinemas.</small>
    </form>
   </section><Footer/></main>;
 }
