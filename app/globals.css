@@ -1390,3 +1390,110 @@ html, body, button, input, textarea, select, option {
 @media (prefers-reduced-motion: reduce) {
   .dhc-site *, .dhc-site *::before, .dhc-site *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Brand mark sizing: give the supplied vertical logo enough room in both lockups. */
+.dhc-site .dhc-nav {
+  height: 104px;
+  min-height: 104px;
+}
+.dhc-site .dhc-nav .brand {
+  gap: 15px;
+  min-width: 0;
+}
+.dhc-site .dhc-nav .dhc-logo-wrap {
+  flex: 0 0 66px;
+  width: 66px;
+  height: 78px;
+  border: 0 !important;
+  background: transparent;
+  overflow: visible;
+}
+.dhc-site .dhc-nav .dhc-logo-wrap img {
+  display: block;
+  width: 66px !important;
+  height: 78px !important;
+  object-fit: contain;
+  object-position: center;
+}
+.dhc-site .dhc-nav .brand-name {
+  font-size: 12px;
+  letter-spacing: .13em;
+  line-height: 1.45;
+}
+.dhc-site .dhc-nav .brand-name small {
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+.dhc-site .footer .brand {
+  gap: 16px;
+}
+.dhc-site .footer .dhc-logo-wrap {
+  flex: 0 0 78px;
+  width: 78px;
+  height: 94px;
+  border: 0 !important;
+  background: transparent;
+  overflow: visible;
+}
+.dhc-site .footer .dhc-logo-wrap img {
+  display: block;
+  width: 78px !important;
+  height: 94px !important;
+  object-fit: contain;
+  object-position: center;
+}
+.dhc-site .footer .brand-name {
+  font-size: 13px;
+  letter-spacing: .14em;
+}
+.dhc-site .footer .brand-name small {
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+@media (max-width: 1180px) {
+  .dhc-site .dhc-nav {
+    height: 90px;
+    min-height: 90px;
+  }
+  .dhc-site .dhc-nav .dhc-logo-wrap,
+  .dhc-site .dhc-nav .dhc-logo-wrap img {
+    width: 58px !important;
+    height: 70px !important;
+  }
+  .dhc-site .dhc-nav .dhc-logo-wrap { flex-basis: 58px; }
+}
+@media (max-width: 560px) {
+  .dhc-site .dhc-nav {
+    height: 78px;
+    min-height: 78px;
+    padding-inline: 14px;
+  }
+  .dhc-site .dhc-nav .brand {
+    gap: 7px;
+  }
+  .dhc-site .dhc-nav .dhc-logo-wrap,
+  .dhc-site .dhc-nav .dhc-logo-wrap img {
+    width: 48px !important;
+    height: 60px !important;
+  }
+  .dhc-site .dhc-nav .dhc-logo-wrap { flex-basis: 48px; }
+  .dhc-site .dhc-nav .brand-name {
+    max-width: 150px;
+    font-size: .78rem !important;
+    letter-spacing: .02em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    max-width: 150px;
+    font-size: .6rem !important;
+    letter-spacing: .025em !important;
+  }
+  .dhc-site .footer .dhc-logo-wrap,
+  .dhc-site .footer .dhc-logo-wrap img {
+    width: 66px !important;
+    height: 80px !important;
+  }
+  .dhc-site .footer .dhc-logo-wrap { flex-basis: 66px; }
+  .dhc-site .footer .brand-name { font-size: 11px; }
+  .dhc-site .footer .brand-name small { font-size: 7px; }
+}
