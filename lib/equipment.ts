@@ -27,3 +27,6 @@ export const calculateEquipmentEstimate = (selectedNames: readonly string[]): nu
     .filter((item) => selected.has(item.name))
     .reduce((total, item) => total + item.price, 0);
 };
+
+export const isKnownEquipmentItem = (name: string): boolean =>
+  getAllEquipment().some((item) => item.name === name);
