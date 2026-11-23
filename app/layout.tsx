@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font -- App Router global font loading belongs in the root layout. */
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
