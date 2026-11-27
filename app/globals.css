@@ -1497,3 +1497,89 @@ html, body, button, input, textarea, select, option {
   .dhc-site .footer .brand-name { font-size: 11px; }
   .dhc-site .footer .brand-name small { font-size: 7px; }
 }
+
+
+/* CMS-connected portfolio cards and enlarged desktop brand lockup */
+@media (min-width: 901px) {
+  .dhc-site .brand-name { font-size: 15px; letter-spacing: .10em; }
+  .dhc-site .brand-name small { font-size: 10px; letter-spacing: .18em; }
+}
+.source-recent-works { margin: 38px 0 54px; }
+.source-recent-works > .eyebrow { margin-bottom: 10px; }
+.source-recent-works h2 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 22px; }
+.source-work-grid .source-work-card { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #151515; }
+.source-work-grid .source-work-card img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.7); transition: transform .6s; }
+.source-work-grid .source-work-card:hover img { transform: scale(1.05); }
+.source-work-grid .source-work-card::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.8)); }
+.source-work-grid .source-work-card .source-work-overlay span { position: absolute; z-index: 2; bottom: 17px; left: 18px; color: #fff; font-size: 10px; letter-spacing: .13em; }
+
+
+/* Explicit desktop brand typography override: keep the name and tagline visibly larger. */
+@media (min-width: 901px) {
+  .dhc-site .dhc-nav .brand-name {
+    font-size: 19px !important;
+    line-height: 1.35 !important;
+    letter-spacing: .09em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    display: block !important;
+    margin-top: 5px !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    letter-spacing: .16em !important;
+  }
+}
+.source-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 34px 0 72px;
+}
+.source-category-card {
+  min-height: 220px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid rgba(245,183,47,.25);
+  background: linear-gradient(145deg, rgba(245,183,47,.09), rgba(255,255,255,.015) 55%, rgba(0,0,0,.3));
+  color: #f4f0e9;
+  text-decoration: none;
+  transition: border-color .25s ease, transform .25s ease, background .25s ease;
+}
+.source-category-card:hover { transform: translateY(-4px); border-color: #f5b72f; background: linear-gradient(145deg, rgba(245,183,47,.16), rgba(255,255,255,.025) 55%, rgba(0,0,0,.3)); }
+.source-category-card h2 { margin: 14px 0; font-size: clamp(24px, 2.5vw, 34px); }
+.source-category-action { color: #f5c34d; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+@media (max-width: 900px) { .source-category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 600px) {
+  .source-category-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
+  .source-category-card { min-height: 160px; padding: 22px; }
+}
+
+
+/* Final desktop brand sizing requested by client: clearly legible name and tagline. */
+@media (min-width: 561px) {
+  .dhc-site .dhc-nav .brand-name {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    letter-spacing: .075em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    display: block !important;
+    margin-top: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    letter-spacing: .13em !important;
+  }
+}
+
+
+/* Contact page interactive location map */
+.source-contact-map{max-width:1040px;margin:70px auto 0;text-align:left;border-top:1px solid var(--line);padding-top:45px}
+.source-contact-map h2{font-size:clamp(30px,4vw,48px);margin:12px 0}
+.source-contact-map>p{color:#aaa;font-size:13px;line-height:1.8;margin-bottom:22px}
+.source-map-frame{display:block;position:relative;width:100%;height:430px;overflow:hidden;border:1px solid var(--line);background:#111}
+.source-map-frame iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(.85) contrast(1.05)}
+.source-map-cta{position:absolute;right:16px;bottom:16px;background:var(--gold);color:#111;padding:12px 17px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;pointer-events:none}
+.source-contact-map>.button-gold{display:inline-flex;margin-top:18px}
+@media(max-width:700px){.source-map-frame{height:320px}.source-contact-map{margin-top:48px}}
