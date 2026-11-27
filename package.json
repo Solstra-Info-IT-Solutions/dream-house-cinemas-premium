@@ -9,14 +9,22 @@
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.468.0",
     "next": "^15.5.9",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "@prisma/client": "^6.19.0",
+    "bcryptjs": "^3.0.2",
+    "jose": "^6.1.3",
+    "resend": "^6.4.2",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
@@ -30,7 +38,9 @@
     "@playwright/test": "^1.56.1",
     "@axe-core/playwright": "^4.10.2",
     "@eslint/eslintrc": "^3.3.1",
-    "vitest": "^4.1.12"
+    "vitest": "^4.1.12",
+    "prisma": "^6.19.0",
+    "tsx": "^4.20.6"
   },
   "overrides": {
     "next": {
