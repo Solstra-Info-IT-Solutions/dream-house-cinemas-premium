@@ -7,8 +7,11 @@ export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
     const adminEmail = process.env.ADMIN_EMAIL;
     const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-    if (!adminEmail || !passwordHash) return NextResponse.json({ error: "Admin credentials are not configured" }, { status: 503 });
-    if (typeof email !== "string" || typeof password !== "string" || email.toLowerCase() !== adminEmail.toLowerCase() || !(await compare(password, passwordHash))) {
+    const demoEmail = process.env.VERCEL_ENV === "preview" ? process.env.ADMIN_DEMO_EMAIL : undefined;
+    const demoPassword = process.env.VERCEL_ENV === "preview" ? process.env.ADMIN_DEMO_PASSWORD : undefined;
+    const isDemoLogin = Boolean(demoEmail && demoPassword && typeof email === "string" && typeof password === "string" && email.toLowerCase() === demoEmail.toLowerCase() && password === demoPassword);
+    if ((!adminEmail || !passwordHash) && !isDemoLogin) return NextResponse.json({ error: "Admin credentials are not configured" }, { status: 503 });
+    if (typeof email !== "string" || typeof password !== "string" || (!isDemoLogin && (!adminEmail || !passwordHash || email.toLowerCase() !== adminEmail.toLowerCase() || !(await compare(password, passwordHash))))) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
     await createAdminSession();
