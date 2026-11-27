@@ -117,18 +117,15 @@ const workItems=[
  ["promo","EVENT FILM","https://images.pexels.com/photos/8089652/pexels-photo-8089652.jpeg?auto=compress&cs=tinysrgb&w=1400"]
 ];
 export function WorksPage(){
- const [data,setData]=useState<{categories:{id:string;name:string;slug:string;projects:{id:string;title:string;slug:string;coverImage:string|null;description:string;category:{name:string}}[]}[];recent:{id:string;title:string;slug:string;coverImage:string|null;description:string;category:{name:string}}[]}>({categories:[],recent:[]});
- const [filter,setFilter]=useState("all");
+ const [data,setData]=useState<{categories:{id:string;name:string;slug:string;projects:{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null;category:{name:string}}[]}[];recent:{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null;category:{name:string}}[]}>({categories:[],recent:[]});
  useEffect(()=>{let live=true;fetch("/api/public/works").then(r=>r.ok?r.json():null).then(v=>{if(live&&v)setData(v)}).catch(()=>{});return()=>{live=false};},[]);
- const all=data.categories.flatMap(c=>c.projects);
- const visible=filter==="all"?all:all.filter(p=>data.categories.find(c=>c.projects.some(x=>x.id===p.id))?.slug===filter);
- const fallback=all.length===0;
  return <main className="site-shell dhc-site"><Header/><section className="wrap source-works">
-  <div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Every production starts with a point of view. Explore the stories and visual projects Dream House Cinemas creates.</p></div>
-  {!fallback&&data.recent.length>0&&<section className="source-recent-works"><div className="eyebrow">Fresh from the studio</div><h2 className="serif">Recent <em>Works</em></h2><div className="source-work-grid">{data.recent.map(p=><Link key={p.id} href={"/works/"+p.slug} className="source-work-card">{p.coverImage&&<Image src={p.coverImage} alt={p.title} fill sizes="(max-width: 640px) 100vw, 33vw"/>}<div className="source-work-overlay"><span>{p.title}</span></div><i aria-hidden="true"/></Link>)}</div></section>}
-  <div className="source-filter" role="group" aria-label="Filter portfolio work"><button type="button" aria-pressed={filter==="all"} onClick={()=>setFilter("all")} className={filter==="all"?"active":""}>ALL</button>{data.categories.map(c=><button key={c.id} type="button" aria-pressed={filter===c.slug} onClick={()=>setFilter(c.slug)} className={filter===c.slug?"active":""}>{c.name.toUpperCase()}</button>)}</div>
-  {!fallback?<div className="source-work-grid">{visible.map(p=><Link key={p.id} href={"/works/"+p.slug} className="source-work-card">{p.coverImage&&<Image src={p.coverImage} alt={p.title} fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" loading="lazy"/>}<div className="source-work-overlay"><span>{p.title}</span></div><i aria-hidden="true"/></Link>)}</div>:<div className="source-work-grid">{workItems.map(([,label,img])=><article key={img}><Image src={img} alt={label} fill sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw" loading="lazy"/><div className="source-work-overlay"><span>{label}</span></div><i aria-hidden="true"/></article>)}</div>}
-  {all.length===0&&<p className="source-disclaimer">Portfolio entries added by the admin will appear here.</p>}
+  <div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Explore our productions by category, then open each film to watch its story.</p></div>
+  <section className="source-recent-works"><div className="eyebrow">Fresh from the studio</div><h2 className="serif">Recent <em>Works</em></h2>
+   {data.recent.length>0?<div className="source-work-grid">{data.recent.map(p=><Link key={p.id} href={"/works/"+p.slug} className="source-work-card">{p.coverImage&&<Image src={p.coverImage} alt={p.title} fill sizes="(max-width: 640px) 100vw, 33vw"/>}<div className="source-work-overlay"><span>{p.title}</span></div><i aria-hidden="true"/></Link>)}</div>:<p className="source-disclaimer">Recent films will appear here when published by the admin.</p>}
+  </section>
+  <div className="source-category-grid">{data.categories.map(c=><Link key={c.id} href={"/works/category/"+c.slug} className="source-category-card"><span className="eyebrow">{c.projects.length} films</span><h2 className="serif">{c.name}</h2><span className="source-category-action">Explore films</span></Link>)}</div>
+  {data.categories.length===0&&<p className="source-disclaimer">Work categories are being prepared.</p>}
  </section><Footer/></main>;
 }
 export function BookPage(){
