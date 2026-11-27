@@ -1555,3 +1555,20 @@ html, body, button, input, textarea, select, option {
   .source-category-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
   .source-category-card { min-height: 160px; padding: 22px; }
 }
+
+
+/* Final desktop brand sizing requested by client: clearly legible name and tagline. */
+@media (min-width: 561px) {
+  .dhc-site .dhc-nav .brand-name {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    letter-spacing: .075em !important;
+  }
+  .dhc-site .dhc-nav .brand-name small {
+    display: block !important;
+    margin-top: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    letter-spacing: .13em !important;
+  }
+}
