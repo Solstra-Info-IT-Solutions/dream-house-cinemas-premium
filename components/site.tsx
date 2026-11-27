@@ -105,17 +105,7 @@ export function RentalPage(){
  return <main className="site-shell dhc-site"><Header/><SourcePageHero title="Equipment" accent="Rental" copy="Professional Gear. For Every Vision. High quality camera, lighting and grip equipment for films, commercials, documentaries, corporate videos and digital content. Reliable gear. Expert support. On time, every time." image="rental-flatlay.jpg"/>
  <section className="wrap source-content"><div className="eyebrow">— What We Rent —</div><EquipmentCatalogue/><div className="source-trust-strip"><span>🚚 Flexible Rental Periods</span><span>♡ Well Maintained Gear</span><span>🕒 Timely Delivery</span><span>🎧 Expert Support</span><span>✓ Trusted by Professionals</span></div><div className="source-bottom-cta"><p>Need equipment for your next shoot?</p><Link className="button-gold" href="/book?type=rental">Check availability</Link></div></section><Footer/></main>;
 }
-const workItems=[
- ["ad","AD FILM","https://images.pexels.com/photos/32439172/pexels-photo-32439172.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["doc","DOCUMENTARY","https://images.pexels.com/photos/8088381/pexels-photo-8088381.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["corp","CORPORATE FILM","https://images.pexels.com/photos/8088397/pexels-photo-8088397.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["brand","BRAND FILM","https://images.pexels.com/photos/8089657/pexels-photo-8089657.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["promo","PROMOTIONAL VIDEO","https://images.pexels.com/photos/4098170/pexels-photo-4098170.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["ad","JEWELLERY AD","https://images.pexels.com/photos/4154176/pexels-photo-4154176.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["corp","INDUSTRIAL FILM","https://images.pexels.com/photos/8088383/pexels-photo-8088383.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["doc","HEALTHCARE FILM","https://images.pexels.com/photos/8088384/pexels-photo-8088384.jpeg?auto=compress&cs=tinysrgb&w=1400"],
- ["promo","EVENT FILM","https://images.pexels.com/photos/8089652/pexels-photo-8089652.jpeg?auto=compress&cs=tinysrgb&w=1400"]
-];
+
 export function WorksPage(){
  const [categories,setCategories]=useState<{id:string;name:string;slug:string;projects:{id:string}[]}[]>([]);
  const [recent,setRecent]=useState<{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null}[]>([]);
