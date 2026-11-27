@@ -117,15 +117,16 @@ const workItems=[
  ["promo","EVENT FILM","https://images.pexels.com/photos/8089652/pexels-photo-8089652.jpeg?auto=compress&cs=tinysrgb&w=1400"]
 ];
 export function WorksPage(){
- const [data,setData]=useState<{categories:{id:string;name:string;slug:string;projects:{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null;category:{name:string}}[]}[];recent:{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null;category:{name:string}}[]}>({categories:[],recent:[]});
- useEffect(()=>{let live=true;fetch("/api/public/works").then(r=>r.ok?r.json():null).then(v=>{if(live&&v)setData(v)}).catch(()=>{});return()=>{live=false};},[]);
+ const [categories,setCategories]=useState<{id:string;name:string;slug:string;projects:{id:string}[]}[]>([]);
+ const [recent,setRecent]=useState<{id:string;title:string;slug:string;coverImage:string|null;description:string;mediaUrl:string|null}[]>([]);
+ useEffect(()=>{let live=true;Promise.all([fetch("/api/public/works").then(r=>r.ok?r.json():null),fetch("/api/public/recent-works").then(r=>r.ok?r.json():null)]).then(([workData,recentData])=>{if(!live)return;if(workData?.categories)setCategories(workData.categories);if(recentData?.items)setRecent(recentData.items);}).catch(()=>{});return()=>{live=false};},[]);
  return <main className="site-shell dhc-site"><Header/><section className="wrap source-works">
-  <div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Explore our productions by category, then open each film to watch its story.</p></div>
-  <section className="source-recent-works"><div className="eyebrow">Fresh from the studio</div><h2 className="serif">Recent <em>Works</em></h2>
-   {data.recent.length>0?<div className="source-work-grid">{data.recent.map(p=><Link key={p.id} href={"/works/"+p.slug} className="source-work-card">{p.coverImage&&<Image src={p.coverImage} alt={p.title} fill sizes="(max-width: 640px) 100vw, 33vw"/>}<div className="source-work-overlay"><span>{p.title}</span></div><i aria-hidden="true"/></Link>)}</div>:<p className="source-disclaimer">Recent films will appear here when published by the admin.</p>}
+  <div className="source-works-intro"><div className="eyebrow">Our Work —</div><h1 className="serif">Featured <em>Work</em></h1><p>Explore our featured films by category. Choose a category to see only its productions, then open a film to watch the full video.</p></div>
+  <div className="source-category-grid">{categories.map(c=><Link key={c.id} href={"/works/category/"+c.slug} className="source-category-card"><span className="eyebrow">{c.projects.length} films</span><h2 className="serif">{c.name}</h2><span className="source-category-action">Explore films</span></Link>)}</div>
+  {categories.length===0&&<p className="source-disclaimer">Featured film categories will appear here when published by the admin.</p>}
+  <section className="source-recent-works" id="recent-works"><div className="eyebrow">Client activity & latest updates</div><h2 className="serif">Recent <em>Works</em></h2><p>Recent projects, client activities and updates from Dream House Cinemas.</p>
+   {recent.length>0?<div className="source-work-grid">{recent.map(p=><Link key={p.id} href={"/recent-works/"+p.slug} className="source-work-card">{p.coverImage&&<Image src={p.coverImage} alt={p.title} fill sizes="(max-width: 640px) 100vw, 33vw"/>}<div className="source-work-overlay"><span>{p.title}</span></div><i aria-hidden="true"/></Link>)}</div>:<p className="source-disclaimer">Client updates will appear here when added by the admin.</p>}
   </section>
-  <div className="source-category-grid">{data.categories.map(c=><Link key={c.id} href={"/works/category/"+c.slug} className="source-category-card"><span className="eyebrow">{c.projects.length} films</span><h2 className="serif">{c.name}</h2><span className="source-category-action">Explore films</span></Link>)}</div>
-  {data.categories.length===0&&<p className="source-disclaimer">Work categories are being prepared.</p>}
  </section><Footer/></main>;
 }
 export function BookPage(){
