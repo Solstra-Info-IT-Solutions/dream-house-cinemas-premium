@@ -2,7 +2,6 @@ import {notFound} from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {db} from "@/lib/db";
-import {isAdminRequest} from "@/lib/admin-auth";
 export const dynamic="force-dynamic";
 export default async function WorkDetailPage({params}:{params:Promise<{slug:string}>}){
  const {slug}=await params;const project=await db.project.findFirst({where:{slug,published:true},include:{category:true}});
