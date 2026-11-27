@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WorkCategory {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  sortOrder Int       @default(0)
+  active    Boolean   @default(true)
+  projects  Project[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  description String        @default("")
+  categoryId  String
+  category    WorkCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  coverImage  String?
+  mediaUrl    String?
+  featured    Boolean       @default(false)
+  recent      Boolean       @default(false)
+  published   Boolean       @default(false)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model EquipmentCategory {
+  id        String          @id @default(cuid())
+  name      String
+  slug      String          @unique
+  sortOrder Int             @default(0)
+  active    Boolean         @default(true)
+  items     EquipmentItem[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model EquipmentItem {
+  id          String            @id @default(cuid())
+  name        String
+  description String            @default("")
+  price       Int               @default(0)
+  imageUrl    String?
+  active      Boolean           @default(true)
+  sortOrder   Int               @default(0)
+  categoryId  String
+  category    EquipmentCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  enquiries   EnquiryEquipment[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model Enquiry {
+  id          String              @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  subject     String              @default("Equipment enquiry")
+  message     String              @default("")
+  status      String              @default("NEW")
+  equipment   EnquiryEquipment[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model EnquiryEquipment {
+  enquiryId  String
+  equipmentId String
+  enquiry    Enquiry       @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  equipment  EquipmentItem @relation(fields: [equipmentId], references: [id], onDelete: Restrict)
+  @@id([enquiryId, equipmentId])
+}
