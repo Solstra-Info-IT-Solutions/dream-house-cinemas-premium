@@ -94,3 +94,11 @@ model EnquiryEquipment {
   equipment  EquipmentItem @relation(fields: [equipmentId], references: [id], onDelete: Restrict)
   @@id([enquiryId, equipmentId])
 }
+
+model SiteSetting {
+  id              String   @id @default("global")
+  locationName    String   @default("Kochi, Kerala, India")
+  locationAddress String   @default("Kochi, Kerala, India")
+  mapUrl          String   @default("https://www.google.com/maps/search/?api=1&query=Kochi%2C%20Kerala%2C%20India")
+  updatedAt       DateTime @updatedAt
+}
