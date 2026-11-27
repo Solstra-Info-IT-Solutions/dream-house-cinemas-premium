@@ -83,7 +83,7 @@ const sourceServices = [
 ];
 
 function EquipmentCatalogue({compact=false}:{compact?:boolean}){
- const [groups,setGroups]=useState<{id:string;title:string;items:{id:string;name:string;price:number}[]}[]>(equipmentGroups.map((g,i)=>({id:String(i),title:g.title,items:g.items.map((item,j)=>({id:item.name,name:item.name,price:item.price}))})));
+ const [groups,setGroups]=useState<{id:string;title:string;items:{id:string;name:string;price:number}[]}[]>(equipmentGroups.map((g,i)=>({id:String(i),title:g.title,items:g.items.map(item=>({id:item.name,name:item.name,price:item.price}))})));
  useEffect(()=>{let live=true;fetch("/api/public/equipment").then(r=>r.ok?r.json():null).then(data=>{if(live&&data?.categories?.length)setGroups(data.categories.map((g:{id:string;name:string;items:{id:string;name:string;price:number}[]})=>({id:g.id,title:g.name,items:g.items})));}).catch(()=>{});return()=>{live=false};},[]);
  const [expanded,setExpanded]=useState<Record<string,boolean>>({});
  return <div className={compact?"dhc-catalogue dhc-catalogue-compact":"dhc-catalogue"}>
