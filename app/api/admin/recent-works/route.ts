@@ -6,7 +6,7 @@ const schema = z.object({
   title: z.string().trim().min(2).max(140),
   description: z.string().max(5000).optional(),
   coverImage: z.string().url().optional().or(z.literal("")),
-  mediaUrl: z.string().url().optional().or(z.literal("")),
+  mediaUrl: z.string().url(),
   published: z.boolean().optional(),
   sortOrder: z.number().int().optional()
 });
