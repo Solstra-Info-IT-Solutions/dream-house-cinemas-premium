@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useState,FormEvent} from "react";
 type Category={id:string;name:string;slug:string;active:boolean};
-type Equipment={id:string;name:string;price:number;active:boolean;category:Category};
+type Equipment={id:string;name:string;price:number;active:boolean;categoryId:string;category:Category};
 type Project={id:string;title:string;slug:string;published:boolean;recent:boolean;category:Category};
 type Enquiry={id:string;name:string;email:string;phone:string;subject:string;status:string;createdAt:string;equipment:{equipment:Equipment}[]};
 const inputStyle={width:"100%",padding:"12px 14px",background:"#080808",border:"1px solid #514a3e",color:"#f4f0e9",font:"inherit",marginTop:7} as const;
