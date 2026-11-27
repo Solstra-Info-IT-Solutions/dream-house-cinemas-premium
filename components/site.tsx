@@ -4,7 +4,7 @@ import { ArrowDown, Clapperboard, Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { calculateEquipmentEstimate, equipmentGroups, isKnownEquipmentItem, money } from "@/lib/equipment";
+import { equipmentGroups, money } from "@/lib/equipment";
 
 const V = {
   hero: "https://videos.pexels.com/video-files/36604690/15520309_1920_1080_25fps.mp4",
