@@ -1583,3 +1583,109 @@ html, body, button, input, textarea, select, option {
 .source-map-cta{position:absolute;right:16px;bottom:16px;background:var(--gold);color:#111;padding:12px 17px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;pointer-events:none}
 .source-contact-map>.button-gold{display:inline-flex;margin-top:18px}
 @media(max-width:700px){.source-map-frame{height:320px}.source-contact-map{margin-top:48px}}
+
+
+/* UI polish pass: wider content canvas, calmer spacing and consistent type scale.
+   Intentionally preserves the existing DHC palette, imagery and Playfair Display font. */
+.dhc-site {
+  --dhc-gutter: clamp(18px, 3.2vw, 48px);
+  --dhc-content-max: 1600px;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.dhc-site .wrap {
+  width: min(var(--dhc-content-max), calc(100% - (var(--dhc-gutter) * 2)));
+}
+.dhc-site .dhc-intro,
+.dhc-site .dhc-services,
+.dhc-site .dhc-rental,
+.dhc-site .dhc-process,
+.dhc-site .dhc-about-story,
+.dhc-site .dhc-about-cta,
+.dhc-site .source-content,
+.dhc-site .source-works,
+.dhc-site .source-contact,
+.dhc-site .source-form-wrap {
+  padding-block: clamp(56px, 6vw, 92px);
+}
+.dhc-site .source-page-hero {
+  gap: clamp(28px, 5vw, 72px);
+}
+.dhc-site .section-head {
+  gap: 24px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.dhc-site .source-page-hero h1,
+.dhc-site .source-works h1,
+.dhc-site .source-form-wrap h1,
+.dhc-site .source-contact h1,
+.dhc-site .dhc-hero-content h1 {
+  text-wrap: balance;
+}
+.dhc-site h2,
+.dhc-site h3,
+.dhc-site h4 {
+  text-wrap: balance;
+}
+.dhc-site .dhc-service h3,
+.dhc-site .dhc-equipment-card h3,
+.dhc-site .source-work-card h3 {
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+.dhc-site .source-form-wrap {
+  max-width: 100%;
+  padding-inline: var(--dhc-gutter);
+}
+.dhc-site .source-form-wrap > .source-form,
+.dhc-site .source-form-wrap .source-form {
+  width: min(100%, 980px);
+  margin-inline: auto;
+}
+@media (min-width: 1600px) {
+  .dhc-site .wrap { width: min(1680px, calc(100% - 96px)); }
+}
+@media (max-width: 900px) {
+  .dhc-site { --dhc-gutter: 24px; }
+  .dhc-site .source-page-hero { gap: 28px; }
+}
+@media (max-width: 560px) {
+  .dhc-site { --dhc-gutter: 18px; font-size: 15px; }
+  .dhc-site .wrap { width: calc(100% - 36px); }
+  .dhc-site .dhc-intro,
+  .dhc-site .dhc-services,
+  .dhc-site .dhc-rental,
+  .dhc-site .dhc-process,
+  .dhc-site .dhc-about-story,
+  .dhc-site .dhc-about-cta,
+  .dhc-site .source-content,
+  .dhc-site .source-works,
+  .dhc-site .source-contact,
+  .dhc-site .source-form-wrap { padding-block: 54px; }
+  .dhc-site .source-form-wrap { padding-inline: 18px; }
+}
+
+/* Admin CMS typography and page gutters — no color or theme changes. */
+.dhc-site:has(> nav) {
+  padding: clamp(22px, 3vw, 42px) clamp(18px, 3.2vw, 48px) !important;
+  max-width: 1720px;
+  margin-inline: auto;
+}
+.dhc-site:has(> nav) h1 { font-size: clamp(32px, 3.5vw, 46px) !important; line-height: 1.12 !important; }
+.dhc-site:has(> nav) h2 { font-size: clamp(22px, 2.2vw, 30px) !important; line-height: 1.25 !important; }
+.dhc-site:has(> nav) p { font-size: 14px; line-height: 1.7; }
+.dhc-site:has(> nav) label { font-size: 14px; line-height: 1.5; }
+.dhc-site:has(> nav) input,
+.dhc-site:has(> nav) textarea,
+.dhc-site:has(> nav) select,
+.dhc-site:has(> nav) button { font-family: var(--font-playfair); }
+.dhc-site:has(> nav) input,
+.dhc-site:has(> nav) textarea,
+.dhc-site:has(> nav) select { font-size: 14px !important; line-height: 1.5; }
+.dhc-site:has(> nav) nav button { padding: 12px 16px; font-size: 12px; letter-spacing: .06em; }
+.dhc-site:has(> nav) section { min-width: 0; }
+@media (max-width: 600px) {
+  .dhc-site:has(> nav) { padding: 20px 16px !important; }
+  .dhc-site:has(> nav) nav { gap: 8px !important; margin-block: 22px !important; }
+  .dhc-site:has(> nav) nav button { padding: 10px 12px; font-size: 11px; }
+}
