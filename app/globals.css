@@ -1497,3 +1497,87 @@ html, body, button, input, textarea, select, option {
   .dhc-site .footer .brand-name { font-size: 11px; }
   .dhc-site .footer .brand-name small { font-size: 7px; }
 }
+
+
+/* HOMEPAGE POLISH — brand lockup, editorial marquee, production sections */
+.dhc-site .dhc-nav .brand-name{font-size:11px!important;letter-spacing:.075em!important;line-height:1.25}
+.dhc-site .dhc-nav .brand-name small{font-size:7.4px!important;letter-spacing:.09em!important;line-height:1.25;margin-top:3px}
+.dhc-site .dhc-home-marquee{position:relative;overflow:hidden;padding:22px 0;background:#0b0b0b;border-block:1px solid rgba(245,183,47,.24);color:#f4eee5}
+.dhc-site .dhc-marquee-track{display:flex;width:max-content;align-items:center;animation:dhc-marquee-scroll 38s linear infinite}
+.dhc-site .dhc-marquee-group{display:flex;flex:0 0 auto;align-items:center;gap:clamp(22px,3vw,48px);padding-right:clamp(22px,3vw,48px);white-space:nowrap}
+.dhc-site .dhc-marquee-group span{font-size:clamp(11px,.9vw,14px);letter-spacing:.17em;font-weight:400}
+.dhc-site .dhc-marquee-group i{font-style:normal;color:#f5b72f;font-size:19px;line-height:1}
+.dhc-site .dhc-home-marquee:hover .dhc-marquee-track{animation-play-state:paused}
+@keyframes dhc-marquee-scroll{to{transform:translateX(-50%)}}
+.dhc-site .dhc-production-band{isolation:isolate}
+.dhc-site .dhc-production-band>video{transform:scale(1.015);filter:saturate(.62) contrast(1.08)}
+.dhc-site .dhc-band-shade{background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.57) 43%,rgba(0,0,0,.08) 100%),linear-gradient(0deg,rgba(0,0,0,.62),transparent 58%)}
+.dhc-site .dhc-band-copy{left:clamp(28px,9vw,140px);max-width:min(780px,82vw);padding:clamp(26px,4vw,54px) clamp(22px,4vw,52px);border-left:1px solid rgba(245,183,47,.68);background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.03));}
+.dhc-site .dhc-band-index{display:block;margin-bottom:24px;color:rgba(255,255,255,.72);font-size:9px;letter-spacing:.22em}
+.dhc-site .dhc-band-copy .eyebrow{display:block;margin-bottom:7px;color:#f5c34d}
+.dhc-site .dhc-band-copy p{font-size:clamp(54px,7.2vw,104px);line-height:.98;letter-spacing:-.045em;margin:18px 0 25px;text-wrap:balance}
+.dhc-site .dhc-band-copy>span:last-child{display:flex;align-items:center;gap:11px;flex-wrap:wrap;font-size:10px;letter-spacing:.16em;line-height:1.8;color:#f0e9df}
+.dhc-site .dhc-band-phases i{display:inline-block;width:22px;height:1px;background:#f5b72f}
+.dhc-site .dhc-band-phases b{color:#f5b72f;font-weight:400}
+.dhc-site .dhc-band-corner{position:absolute;width:34px;height:34px;pointer-events:none;border-color:rgba(245,183,47,.72)}
+.dhc-site .dhc-band-corner-top{top:32px;right:32px;border-top:1px solid;border-right:1px solid}
+.dhc-site .dhc-band-corner-bottom{bottom:32px;right:32px;border-bottom:1px solid;border-right:1px solid}
+.dhc-site .dhc-capabilities-head{align-items:end;gap:30px;margin-bottom:38px}
+.dhc-site .dhc-capabilities-note{margin:0 0 5px;color:#a9a39b;font-size:13px;line-height:1.8;letter-spacing:.025em}
+.dhc-site .dhc-service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid rgba(255,255,255,.18);border-left:1px solid rgba(255,255,255,.12)}
+.dhc-site .dhc-service{min-width:0;min-height:260px;padding:27px 28px 25px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.18);transition:background .3s ease,transform .3s ease}
+.dhc-site .dhc-service:nth-child(3n+1){border-left:0}
+.dhc-site .dhc-service:hover{background:linear-gradient(145deg,rgba(245,183,47,.075),transparent 65%);transform:translateY(-2px)}
+.dhc-site .dhc-service-index{display:flex;align-items:center;gap:8px;color:#f5c34d;font-size:10px;letter-spacing:.14em}
+.dhc-site .dhc-service-index i{font-style:normal;color:#77716a;font-size:9px}
+.dhc-site .dhc-service h3{font-size:clamp(19px,1.65vw,25px);line-height:1.25;margin:30px 0 12px;letter-spacing:-.015em}
+.dhc-site .dhc-service p{max-width:310px;color:#b4b0aa;font-size:13px;line-height:1.8;margin:0}
+.dhc-site .dhc-service>a{position:static;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);color:#e7d9bc;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.dhc-site .dhc-service>a b{color:#f5b72f;font-size:18px;font-weight:400;transition:transform .2s ease}
+.dhc-site .dhc-service:hover>a b{transform:translate(3px,-2px)}
+.dhc-site .dhc-reel{isolation:isolate}
+.dhc-site .dhc-reel>video{filter:saturate(.58) contrast(1.08);transform:scale(1.02)}
+.dhc-site .dhc-reel-shade{background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.26) 58%,rgba(0,0,0,.08)),linear-gradient(0deg,rgba(0,0,0,.68),transparent 72%)}
+.dhc-site .dhc-reel-caption{left:clamp(28px,9vw,140px);top:auto;bottom:clamp(50px,8vw,110px);transform:none;max-width:min(760px,82vw);padding-left:clamp(22px,3.5vw,48px);border-left:1px solid rgba(245,183,47,.7)}
+.dhc-site .dhc-reel-index{display:block;margin-bottom:24px;color:rgba(255,255,255,.72);font-size:9px;letter-spacing:.2em}
+.dhc-site .dhc-reel-index i{font-style:normal;color:#f5b72f;padding-inline:8px}
+.dhc-site .dhc-reel-caption .eyebrow{display:block;margin-bottom:8px;color:#f5c34d}
+.dhc-site .dhc-reel-caption p{font-size:clamp(52px,7vw,96px);line-height:1;letter-spacing:-.04em;margin:16px 0 24px}
+.dhc-site .dhc-reel-foot{display:flex;align-items:center;gap:12px;color:#e8e0d5;font-size:9px;letter-spacing:.16em;line-height:1.8}
+.dhc-site .dhc-reel-foot i{display:inline-block;width:22px;height:1px;background:#f5b72f}
+.dhc-site .dhc-reel-frame{position:absolute;top:32px;right:32px;width:34px;height:34px;border-top:1px solid rgba(245,183,47,.7);border-right:1px solid rgba(245,183,47,.7)}
+@media(max-width:900px){
+ .dhc-site .dhc-band-copy{left:6vw;max-width:88vw}
+ .dhc-site .dhc-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dhc-site .dhc-service:nth-child(3n+1){border-left:1px solid rgba(255,255,255,.12)}
+ .dhc-site .dhc-service:nth-child(2n+1){border-left:0}
+ .dhc-site .dhc-reel-caption{left:6vw;max-width:88vw}
+}
+@media(max-width:560px){
+ .dhc-site .dhc-nav .brand-name{font-size:10px!important;letter-spacing:.035em!important}
+ .dhc-site .dhc-nav .brand-name small{font-size:7px!important;letter-spacing:.04em!important}
+ .dhc-site .dhc-home-marquee{padding:17px 0}
+ .dhc-site .dhc-marquee-group{gap:20px;padding-right:20px}
+ .dhc-site .dhc-marquee-group span{font-size:10px;letter-spacing:.12em}
+ .dhc-site .dhc-production-band{height:590px}
+ .dhc-site .dhc-band-copy{left:18px;max-width:calc(100% - 36px);padding:24px 18px}
+ .dhc-site .dhc-band-index{font-size:8px;margin-bottom:18px}
+ .dhc-site .dhc-band-copy p{font-size:clamp(48px,13vw,68px);margin:16px 0 22px}
+ .dhc-site .dhc-band-copy>span:last-child{font-size:8px;gap:7px;letter-spacing:.1em}
+ .dhc-site .dhc-band-phases i{width:12px}
+ .dhc-site .dhc-band-corner-top{top:16px;right:16px}
+ .dhc-site .dhc-band-corner-bottom{bottom:16px;right:16px}
+ .dhc-site .dhc-capabilities-head{gap:15px}
+ .dhc-site .dhc-capabilities-note{font-size:11px}
+ .dhc-site .dhc-service-grid{grid-template-columns:1fr}
+ .dhc-site .dhc-service,.dhc-site .dhc-service:nth-child(3n+1),.dhc-site .dhc-service:nth-child(2n+1){border-left:0;border-right:0;padding:22px 20px;min-height:0}
+ .dhc-site .dhc-service h3{margin:20px 0 10px;font-size:21px}
+ .dhc-site .dhc-service p{font-size:12px}
+ .dhc-site .dhc-reel{height:560px}
+ .dhc-site .dhc-reel-caption{left:18px;bottom:52px;max-width:calc(100% - 36px);padding-left:18px}
+ .dhc-site .dhc-reel-index{font-size:7px;letter-spacing:.12em;margin-bottom:18px}
+ .dhc-site .dhc-reel-caption p{font-size:clamp(46px,12vw,65px);margin:14px 0 20px}
+ .dhc-site .dhc-reel-foot{font-size:7px;letter-spacing:.1em;gap:8px}
+ .dhc-site .dhc-reel-frame{top:16px;right:16px}
+}
+@media(prefers-reduced-motion:reduce){.dhc-site .dhc-marquee-track{animation:none}}
